@@ -83,27 +83,6 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   background:#04040f;border:1px solid rgba(255,255,255,.07);
   box-shadow:0 24px 80px rgba(0,0,0,.65)}
 #body3d{display:block;width:100%;aspect-ratio:16/9}
-.b3d-sys{position:absolute;top:14px;left:50%;transform:translateX(-50%);
-  font-size:.73rem;font-weight:600;letter-spacing:.05em;padding:4px 16px;
-  border-radius:100px;background:rgba(0,0,0,.6);backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.1);color:#fff;
-  opacity:0;transition:opacity .3s,color .3s,border-color .3s;
-  white-space:nowrap;pointer-events:none}
-.b3d-controls{position:absolute;bottom:0;left:0;right:0;
-  padding:10px 14px 13px;
-  background:linear-gradient(transparent,rgba(2,2,14,.97))}
-.b3d-row{display:flex;align-items:center;gap:10px}
-.b3d-btn{width:30px;height:30px;border-radius:50%;
-  background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
-  color:#fff;font-size:.8rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .2s;flex-shrink:0}
-.b3d-btn:hover{background:rgba(255,255,255,.24)}
-.b3d-prog{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
-.b3d-fill{height:100%;width:0%;border-radius:2px;
-  background:linear-gradient(90deg,#6366f1,#a855f7,#ec4899,#ff1744,#10b981,#f59e0b)}
-.b3d-time{font-size:.69rem;color:rgba(255,255,255,.55);
-  min-width:30px;text-align:right;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -135,15 +114,10 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="b3d-wrap">
     <div class="b3d-glow"></div>
     <div class="b3d-player">
-      <canvas id="body3d" width="560" height="315"></canvas>
-      <div class="b3d-sys" id="b3dSys">🦴 Sistema Óseo</div>
-      <div class="b3d-controls">
-        <div class="b3d-row">
-          <button class="b3d-btn" id="b3dPlay" title="Play/Pause">⏸</button>
-          <div class="b3d-prog"><div class="b3d-fill" id="b3dFill"></div></div>
-          <span class="b3d-time" id="b3dTime">0.0s</span>
-        </div>
-      </div>
+      <video id="body3d" autoplay muted loop playsinline
+             style="display:block;width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover">
+        <source src="body3d.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
@@ -451,192 +425,6 @@ const ham=document.getElementById('ham'),menu=document.getElementById('nav-menu'
 ham.addEventListener('click',()=>menu.classList.toggle('open'));
 document.addEventListener('click',e=>{if(!ham.contains(e.target)&&!menu.contains(e.target))menu.classList.remove('open')});
 
-// ═══════════════════════════════════════
-//  3-D BODY ANIMATION
-// ═══════════════════════════════════════
-(function(){
-  var cv = document.getElementById('body3d');
-  if(!cv) return;
-  var ctx = cv.getContext('2d');
-  var CW = cv.width, CH = cv.height;
-  var OX = CW/2, OY = CH/2 + 14;
-  var SC = CH * 0.39;
-  var LOOP = 3000; // ms per full rotation
-
-  // Joint positions [x, y, z]  (body ≈ 4 units tall, centered)
-  var J = {
-    hd:[0,-1.78,0], nk:[0,-1.38,0],
-    lS:[-0.54,-1.02,0], rS:[0.54,-1.02,0],
-    lE:[-0.84,-0.38,0.06], rE:[0.84,-0.38,0.06],
-    lW:[-0.9,0.32,0.04],  rW:[0.9,0.32,0.04],
-    s1:[0,-0.82,0], s2:[0,-0.4,0], s3:[0,0.05,0], hc:[0,0.28,0],
-    lH:[-0.28,0.31,0], rH:[0.28,0.31,0],
-    lK:[-0.3,1.06,0.04], rK:[0.3,1.06,0.04],
-    lA:[-0.3,1.83,0.02], rA:[0.3,1.83,0.02],
-    lF:[-0.35,1.97,0],   rF:[0.35,1.97,0],
-    lR1:[-0.46,-0.78,0.13], rR1:[0.46,-0.78,0.13],
-    lR2:[-0.49,-0.5,0.15],  rR2:[0.49,-0.5,0.15],
-    lR3:[-0.44,-0.22,0.11], rR3:[0.44,-0.22,0.11],
-    lR4:[-0.34,0.02,0.07],  rR4:[0.34,0.02,0.07]
-  };
-
-  // Bone connections
-  var BONES = [
-    ['nk','lS'],['nk','rS'],
-    ['lS','lE'],['lE','lW'],
-    ['rS','rE'],['rE','rW'],
-    ['nk','s1'],['s1','s2'],['s2','s3'],['s3','hc'],
-    ['hc','lH'],['hc','rH'],
-    ['lH','lK'],['lK','lA'],['lA','lF'],
-    ['rH','rK'],['rK','rA'],['rA','rF'],
-    ['s1','lR1'],['s1','rR1'],
-    ['s2','lR2'],['s2','rR2'],
-    ['s3','lR3'],['s3','rR3'],
-    ['hc','lR4'],['hc','rR4'],
-    ['lR1','lR2'],['rR1','rR2'],
-    ['lR2','lR3'],['rR2','rR3'],
-    ['lR3','lR4'],['rR3','rR4']
-  ];
-
-  // Systems: name, hex color, emoji, highlighted joints (null = all)
-  var SYS = [
-    {n:'Sistema Óseo',       c:'#c8ccd8', e:'🦴', hi:null},
-    {n:'Sistema Nervioso',   c:'#6366f1', e:'🧠', hi:['hd','nk','s1','s2','s3','hc']},
-    {n:'Sistema Circulatorio',c:'#ff1744',e:'❤️', hi:['nk','s1','lR1','rR1','lR2','rR2','lS','rS','lE','rE']},
-    {n:'Sistema Respiratorio',c:'#10b981',e:'🫁', hi:['s1','s2','lR1','rR1','lR2','rR2','lR3','rR3','lR4','rR4']},
-    {n:'Sistema Muscular',   c:'#dc2626', e:'💪', hi:['lS','rS','lE','rE','lW','rW','lH','rH','lK','rK','lA','rA']},
-    {n:'Sistema Digestivo',  c:'#f59e0b', e:'🍎', hi:['s2','s3','hc','lH','rH','lR3','rR3','lR4','rR4']}
-  ];
-
-  var paused = false, startT = 0, pausedAt = 0, totalPaused = 0;
-  var curSys = -1, labelTO;
-  var sysEl  = document.getElementById('b3dSys');
-  var btnEl  = document.getElementById('b3dPlay');
-  var fillEl = document.getElementById('b3dFill');
-  var timeEl = document.getElementById('b3dTime');
-
-  function project(name, angle){
-    var pt = J[name];
-    var x=pt[0], y=pt[1], z=pt[2];
-    var c=Math.cos(angle), s=Math.sin(angle);
-    var rx = x*c - z*s;
-    var rz = x*s + z*c;
-    var dep = 1 + rz * 0.23;
-    return { sx: OX + rx*SC*dep, sy: OY + y*SC, d: rz, a: 0.35 + rz*0.55 };
-  }
-
-  function draw(ts){
-    if(paused) return;
-    if(!startT) startT = ts;
-    var elapsed = ts - startT - totalPaused;
-    var t = (elapsed % LOOP) / LOOP;
-    var angle = t * Math.PI * 2;
-
-    // Switch system label
-    var si = Math.min(Math.floor(t * SYS.length), SYS.length-1);
-    if(si !== curSys){
-      curSys = si;
-      var sys = SYS[si];
-      sysEl.textContent = sys.e + ' ' + sys.n;
-      sysEl.style.color = sys.c;
-      sysEl.style.borderColor = sys.c + '55';
-      sysEl.style.opacity = '1';
-      clearTimeout(labelTO);
-      labelTO = setTimeout(function(){ sysEl.style.opacity = '0'; }, 460);
-    }
-
-    fillEl.style.width = (t*100) + '%';
-    timeEl.textContent = ((elapsed % LOOP)/1000).toFixed(1) + 's';
-
-    ctx.clearRect(0,0,CW,CH);
-
-    // Radial bg
-    var bg = ctx.createRadialGradient(OX,OY,0,OX,OY,CW*0.58);
-    bg.addColorStop(0,'rgba(18,12,48,0.7)');
-    bg.addColorStop(1,'rgba(2,2,12,0)');
-    ctx.fillStyle = bg;
-    ctx.fillRect(0,0,CW,CH);
-
-    var sys = SYS[curSys < 0 ? 0 : curSys];
-
-    // Project all joints
-    var P = {};
-    var names = Object.keys(J);
-    for(var i=0; i<names.length; i++) P[names[i]] = project(names[i], angle);
-
-    // Sort bones back-to-front
-    var sorted = BONES.slice().sort(function(a,b){
-      return ((P[a[0]].d+P[a[1]].d)/2) - ((P[b[0]].d+P[b[1]].d)/2);
-    });
-
-    // Draw bones
-    for(var i=0; i<sorted.length; i++){
-      var bone = sorted[i];
-      var pa = P[bone[0]], pb = P[bone[1]];
-      var lit = sys.hi === null || sys.hi.indexOf(bone[0])>=0 || sys.hi.indexOf(bone[1])>=0;
-      var avg = (pa.a + pb.a) / 2;
-      ctx.beginPath();
-      ctx.moveTo(pa.sx, pa.sy);
-      ctx.lineTo(pb.sx, pb.sy);
-      if(lit){
-        ctx.strokeStyle = sys.c;
-        ctx.lineWidth = Math.max(0.9, (1.5 + (pa.d+pb.d)*0.3) * avg);
-        ctx.shadowColor = sys.c;
-        ctx.shadowBlur = 9;
-      } else {
-        ctx.strokeStyle = 'rgba(65,68,105,0.35)';
-        ctx.lineWidth = 0.7;
-        ctx.shadowBlur = 0;
-      }
-      ctx.lineCap = 'round';
-      ctx.stroke();
-      ctx.shadowBlur = 0;
-    }
-
-    // Head circle
-    var hp = P['hd'];
-    var headLit = sys.hi === null || sys.hi.indexOf('hd') >= 0;
-    ctx.beginPath();
-    ctx.arc(hp.sx, hp.sy, SC * 0.113, 0, Math.PI*2);
-    ctx.strokeStyle = headLit ? sys.c : 'rgba(65,68,105,0.35)';
-    ctx.lineWidth = headLit ? 1.9 : 0.8;
-    ctx.shadowColor = headLit ? sys.c : 'transparent';
-    ctx.shadowBlur = headLit ? 12 : 0;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    // Glowing joint dots (lit only)
-    for(var i=0; i<names.length; i++){
-      var nm = names[i];
-      if(nm === 'hd') continue;
-      var lit = sys.hi === null || (sys.hi && sys.hi.indexOf(nm)>=0);
-      if(!lit) continue;
-      var pp = P[nm];
-      ctx.beginPath();
-      ctx.arc(pp.sx, pp.sy, 2.2 + pp.d*0.6, 0, Math.PI*2);
-      ctx.fillStyle = sys.c;
-      ctx.shadowColor = sys.c;
-      ctx.shadowBlur = 12;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    }
-
-    requestAnimationFrame(draw);
-  }
-
-  requestAnimationFrame(function(ts){ startT = ts; requestAnimationFrame(draw); });
-
-  btnEl.addEventListener('click', function(){
-    paused = !paused;
-    btnEl.textContent = paused ? '▶' : '⏸';
-    if(paused){
-      pausedAt = performance.now();
-    } else {
-      totalPaused += performance.now() - pausedAt;
-      requestAnimationFrame(draw);
-    }
-  });
-})();
 
 </script>
 </body>
