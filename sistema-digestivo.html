@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnatomíaViva — Sistema Digestivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c1:#f59e0b;--c2:#fbbf24;--cg:linear-gradient(135deg,#f59e0b,#fbbf24);--cb:rgba(245,158,11,.1);--cs:rgba(245,158,11,.28);--ct:#fcd34d;--bg:#07071a;--glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);--tx:#f0f0ff;--tx2:rgba(240,240,255,.6)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:58px;background:rgba(7,7,26,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--gb)}
+.nav-brand{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-sys{font-size:.85rem;font-weight:600;color:var(--ct);background:var(--cb);border:1px solid var(--cs);padding:5px 14px;border-radius:100px}
+.nav-menu{display:flex;list-style:none;gap:20px;align-items:center}.nav-menu a{color:var(--tx2);text-decoration:none;font-size:.86rem;font-weight:500;transition:color .2s}.nav-menu a:hover{color:var(--tx)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-ham span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 40px}
+.hero-svg-wrap{width:min(320px,75vw);height:min(270px,58vw);margin-bottom:28px}
+.hero-svg-wrap svg{width:100%;height:100%}
+.hero-stat{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.6rem,7.5vw,5rem);background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px;animation:fadeU .8s ease both}
+.hero-stat-lbl{font-size:.9rem;color:var(--tx2);margin-bottom:18px;animation:fadeU .8s ease .1s both}
+.hero-title{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.12;margin-bottom:10px;animation:fadeU .8s ease .2s both}
+.hero-accent{background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:1rem;max-width:400px;margin-bottom:30px;animation:fadeU .8s ease .3s both}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;background:var(--cg);color:#111;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;padding:13px 30px;border-radius:100px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 0 36px rgba(245,158,11,.4);transition:transform .25s;animation:fadeU .8s ease .4s both}
+.hero-btn:hover{transform:translateY(-3px) scale(1.03)}
+.section{padding:64px 24px;max-width:1100px;margin:0 auto}
+.sec-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(1.5rem,3.2vw,2.1rem);margin-bottom:10px;text-align:center}
+.sec-sub{color:var(--tx2);text-align:center;margin-bottom:36px;font-size:.93rem}
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.comp-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:22px;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative}
+.comp-card:hover{transform:translateY(-5px);border-color:var(--cs);box-shadow:0 12px 40px rgba(245,158,11,.18)}
+.comp-emoji{font-size:2.4rem;margin-bottom:10px}.comp-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:.98rem;margin-bottom:4px;color:var(--ct)}.comp-tag{font-size:.76rem;color:var(--tx2)}
+.comp-arrow{position:absolute;bottom:14px;right:14px;font-size:1.1rem;color:var(--ct);transition:transform .2s}.comp-card:hover .comp-arrow{transform:translateX(4px)}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#0f0f2a;border:1px solid var(--cs);border-radius:24px;max-width:500px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;position:relative;transform:translateY(20px) scale(.97);transition:transform .3s;scrollbar-width:thin;scrollbar-color:var(--cs) transparent}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.07);border:none;color:var(--tx);font-size:1.1rem;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(255,255,255,.14)}
+.modal-emoji{font-size:3rem;margin-bottom:8px}.modal-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.45rem;margin-bottom:5px;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-tagline{color:var(--tx2);font-size:.87rem;margin-bottom:12px}
+.modal-svg{width:100%;max-height:140px;margin-bottom:16px;border-radius:12px;background:var(--cb);padding:10px}
+.modal-desc{font-size:.92rem;line-height:1.65;margin-bottom:16px}
+.modal-facts{display:flex;flex-direction:column;gap:9px}
+.modal-fact{display:flex;align-items:flex-start;gap:10px;background:var(--cb);border:1px solid var(--cs);border-radius:12px;padding:10px 13px;font-size:.85rem;color:var(--tx2)}
+.modal-fact-icon{font-size:1.1rem;flex-shrink:0}
+.quiz-wrap{background:var(--glass);border:1px solid var(--gb);border-radius:24px;padding:30px;max-width:620px;margin:0 auto}
+.quiz-progress{display:flex;gap:6px;margin-bottom:20px}
+.quiz-dot{flex:1;height:4px;border-radius:2px;background:var(--gb);transition:background .3s}
+.quiz-dot.done{background:var(--cg)}.quiz-dot.active{background:var(--c1)}
+.quiz-q{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.04rem;margin-bottom:16px;line-height:1.5}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.quiz-opt{background:var(--glass);border:1px solid var(--gb);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:.87rem;text-align:left;color:var(--tx);transition:all .2s}
+.quiz-opt:hover:not(:disabled){border-color:var(--c1);background:var(--cb);transform:translateY(-2px)}
+.quiz-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15);color:#6ee7b7}
+.quiz-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.12);color:#fca5a5}
+.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.87rem;padding:10px 13px;border-radius:12px;margin-bottom:12px;line-height:1.5}
+.quiz-feedback.ok{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.quiz-feedback.fail{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+.quiz-next{display:inline-flex;align-items:center;gap:8px;background:var(--cg);color:#111;border:none;padding:10px 22px;border-radius:100px;font-size:.87rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif}
+.quiz-score{text-align:center}.quiz-score-num{font-family:'Poppins',sans-serif;font-weight:900;font-size:3.8rem;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.quiz-score-lbl{color:var(--tx2);margin-bottom:16px;font-size:.9rem}
+.quiz-retry{background:var(--cb);border:1px solid var(--cs);color:var(--ct);padding:10px 22px;border-radius:100px;font-size:.87rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif}
+.facts-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:none;cursor:grab}.facts-track:active{cursor:grabbing}.facts-track::-webkit-scrollbar{display:none}
+.fact-card{flex:0 0 176px;background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:18px 14px;scroll-snap-align:start;transition:transform .2s,border-color .2s}
+.fact-card:hover{transform:translateY(-4px);border-color:var(--cs)}
+.fact-em{font-size:2rem;margin-bottom:8px}.fact-txt{font-size:.81rem;color:var(--tx2);line-height:1.5}
+.sys-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:36px 24px;max-width:1100px;margin:0 auto;border-top:1px solid var(--gb)}
+.sys-nav-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:.88rem;padding:10px 20px;border-radius:100px;border:1px solid var(--gb);color:var(--tx2);background:var(--glass);transition:all .25s}
+.sys-nav-btn:hover{border-color:var(--cs);color:var(--ct);background:var(--cb)}
+.sys-nav-home{color:var(--ct);border-color:var(--cs);background:var(--cb)}
+.footer{border-top:1px solid var(--gb);padding:22px;text-align:center;font-size:.8rem;color:var(--tx2)}
+@keyframes fadeU{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes peristalsis{0%,100%{d:path("M60 80 Q90 60,120 80 Q150 100,180 80 Q210 60,240 80")}50%{d:path("M60 80 Q90 100,120 80 Q150 60,180 80 Q210 100,240 80")}}
+.appear{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}.appear.in{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.quiz-opts{grid-template-columns:1fr}.nav-menu{display:none}.nav-ham{display:flex}.nav-menu.open{display:flex;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:rgba(7,7,26,.98);padding:12px 24px 20px;gap:12px;border-bottom:1px solid var(--gb)}}
+@media(max-width:480px){.comp-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-brand" href="index.html">🧬 AnatomíaViva</a>
+  <ul class="nav-menu" id="nav-menu">
+    <li><span class="nav-sys">🫃 Digestivo</span></li>
+    <li><a href="#componentes">Componentes</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="index.html">Inicio</a></li>
+  </ul>
+  <button class="nav-ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<section class="hero">
+  <div class="hero-svg-wrap" style="animation:fadeU .9s ease both">
+    <svg viewBox="0 0 280 280" fill="none">
+      <circle cx="140" cy="32" r="22" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2.5"/>
+      <text x="140" y="38" text-anchor="middle" fill="#fbbf24" font-size="18">😮</text>
+      <line x1="140" y1="54" x2="140" y2="72" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M140 72 Q155 75,162 84 Q170 95,165 108 Q158 120,148 122 L140 122" fill="rgba(245,158,11,.15)" stroke="#f59e0b" stroke-width="2"/>
+      <path d="M65 138 Q75 125,100 125 Q125 118,140 122 Q155 118,160 128 Q168 140,162 155 Q155 168,140 168 Q120 175,100 168 Q80 162,70 150 Q62 142,65 138Z" fill="rgba(245,158,11,.18)" stroke="#f59e0b" stroke-width="2.5"/>
+      <path d="M140 168 Q148 172,150 182 Q155 200,148 215 Q140 230,130 232 Q115 235,108 220 Q100 205,108 192 Q116 178,128 172 Q134 170,140 168Z" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="2">
+        <animate attributeName="d" values="M140 168 Q148 172,150 182 Q155 200,148 215 Q140 230,130 232 Q115 235,108 220 Q100 205,108 192 Q116 178,128 172 Q134 170,140 168Z;M140 168 Q150 174,153 184 Q158 202,150 217 Q142 232,132 234 Q117 237,110 222 Q103 207,110 194 Q118 180,130 173 Q136 170,140 168Z;M140 168 Q148 172,150 182 Q155 200,148 215 Q140 230,130 232 Q115 235,108 220 Q100 205,108 192 Q116 178,128 172 Q134 170,140 168Z" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M108 232 Q95 238,88 252 Q82 264,90 272" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+      <text x="68" y="140" fill="rgba(252,211,77,.6)" font-size="9" font-family="system-ui">Estómago</text>
+      <text x="80" y="210" fill="rgba(252,211,77,.6)" font-size="9" font-family="system-ui">Int. delgado</text>
+    </svg>
+  </div>
+  <div class="hero-stat">9 metros</div>
+  <div class="hero-stat-lbl">es la longitud total de tu tracto digestivo</div>
+  <h1 class="hero-title">24 horas. Ese es el<br><span class="hero-accent">viaje de tu comida.</span></h1>
+  <p class="hero-sub">Desde la boca hasta el final, tu comida recorre 9 metros en un viaje de 24 horas.</p>
+  <a href="#componentes" class="hero-btn">🍽️ Descubrir componentes</a>
+</section>
+<section class="section appear" id="componentes">
+  <h2 class="sec-title">Componentes del sistema</h2>
+  <p class="sec-sub">Haz clic en cada componente para explorar en detalle</p>
+  <div class="comp-grid" id="comp-grid"></div>
+</section>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal"><button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-emoji" class="modal-emoji"></div><div id="modal-name" class="modal-name"></div>
+    <div id="modal-tagline" class="modal-tagline"></div><svg id="modal-svg" class="modal-svg" viewBox="0 0 300 130"></svg>
+    <div id="modal-desc" class="modal-desc"></div><div id="modal-facts" class="modal-facts"></div>
+  </div>
+</div>
+<section class="section appear" id="quiz">
+  <h2 class="sec-title">🧩 Mini Quiz</h2>
+  <p class="sec-sub">5 preguntas — demuestra lo que sabes</p>
+  <div class="quiz-wrap"><div class="quiz-progress" id="quiz-progress"></div><div id="quiz-body"></div></div>
+</section>
+<section class="section appear" id="datos">
+  <h2 class="sec-title">🤯 Datos que te sorprenderán</h2>
+  <div class="facts-track" id="facts-track"></div>
+</section>
+<nav class="sys-nav">
+  <a href="sistema-respiratorio.html" class="sys-nav-btn">← Respiratorio 🫁</a>
+  <a href="index.html" class="sys-nav-btn sys-nav-home">🏠 Inicio</a>
+  <a href="sistema-oseo.html" class="sys-nav-btn">Óseo 💀 →</a>
+</nav>
+<footer class="footer">🧬 AnatomíaViva — Plataforma educativa interactiva</footer>
+<script>
+const SYS = {
+  components: [
+    {id:"boca",emoji:"😮",name:"Boca",tagline:"El inicio del viaje",
+     desc:"Primera etapa de la digestión. Los dientes trituran, la lengua mueve y la saliva (con enzimas) inicia la digestión de carbohidratos.",
+     facts:[["💧","Produces 1.5 litros de saliva cada día"],["🦷","Los dientes son el único tejido que no se regenera"],["⚗️","La amilasa salival digiere el almidón"]],
+     svgCode:`<circle cx="150" cy="65" r="45" fill="rgba(245,158,11,.15)" stroke="#f59e0b" stroke-width="2"/><path d="M120 72 Q150 88,180 72" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/><rect x="122" y="54" width="8" height="12" rx="2" fill="rgba(252,211,77,.5)" stroke="#fbbf24"/><rect x="134" y="52" width="10" height="14" rx="2" fill="rgba(252,211,77,.5)" stroke="#fbbf24"/><rect x="148" y="52" width="10" height="14" rx="2" fill="rgba(252,211,77,.5)" stroke="#fbbf24"/><rect x="162" y="52" width="10" height="14" rx="2" fill="rgba(252,211,77,.5)" stroke="#fbbf24"/><rect x="174" y="54" width="8" height="12" rx="2" fill="rgba(252,211,77,.5)" stroke="#fbbf24"/><ellipse cx="150" cy="80" rx="20" ry="8" fill="rgba(255,120,80,.3)" stroke="#f59e0b" stroke-width="1.5"/>` },
+    {id:"esofago",emoji:"🔄",name:"Esófago",tagline:"El tobogán muscular",
+     desc:"Tubo muscular de 25 cm que conecta la boca con el estómago. Usa contracciones ondulatorias (peristaltismo) para mover la comida.",
+     facts:[["📏","Mide 25 cm y tiene doble capa muscular"],["⏱️","Tarda 8-10 segundos en bajar la comida"],["🤸","Funciona incluso si estás boca abajo"]],
+     svgCode:`<rect x="138" y="10" width="24" height="110" rx="10" fill="rgba(245,158,11,.15)" stroke="#f59e0b" stroke-width="2"/><ellipse cx="150" cy="35" rx="10" ry="6" fill="rgba(251,191,36,.4)" stroke="#fbbf24"><animate attributeName="cy" values="20;115" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="2s" repeatCount="indefinite"/></ellipse><text x="150" y="125" text-anchor="middle" fill="rgba(240,240,255,.5)" font-size="10">Peristaltismo</text>` },
+    {id:"estomago",emoji:"🫙",name:"Estómago",tagline:"La fábrica de ácido",
+     desc:"Bolsa muscular que produce ácido clorhídrico (pH 2). Digiere proteínas y puede expandirse hasta 4 litros. La mucosa se renueva cada 3 días.",
+     facts:[["⚗️","Produce ácido clorhídrico — puede disolver metal"],["🎈","Se expande hasta 4 litros después de comer"],["🔄","La mucosa se renueva cada 3-4 días"]],
+     svgCode:`<path d="M90 45 Q100 30,130 28 Q165 22,185 38 Q200 52,198 75 Q196 100,178 112 Q155 125,128 120 Q105 115,92 100 Q78 84,90 45Z" fill="rgba(245,158,11,.18)" stroke="#f59e0b" stroke-width="2"/><path d="M110 55 Q140 48,170 58" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity=".6"/><path d="M105 72 Q138 64,172 74" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity=".6"/><path d="M108 89 Q138 82,168 90" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity=".6"/><text x="148" y="148" text-anchor="middle" fill="rgba(240,240,255,.5)" font-size="10">pH 1.5 - 3.5</text>` },
+    {id:"intdelg",emoji:"🧵",name:"Int. Delgado",tagline:"El gran absorbedor",
+     desc:"6 metros de tubo replegado que absorbe el 90% de los nutrientes. Sus vellosidades microscópicas multiplican la superficie de absorción.",
+     facts:[["📏","Mide 6-7 metros de longitud"],["🔬","Tiene 6 millones de vellosidades intestinales"],["✅","Absorbe el 90% de los nutrientes"]],
+     svgCode:`<path d="M60 20 Q80 35,60 50 Q40 65,60 80 Q80 95,60 110" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/><path d="M80 20 Q100 35,80 50 Q60 65,80 80 Q100 95,80 110" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/><path d="M170 20 Q190 35,170 50 Q150 65,170 80 Q190 95,170 110" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/><path d="M190 20 Q210 35,190 50 Q170 65,190 80 Q210 95,190 110" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>` },
+    {id:"intgrue",emoji:"🌀",name:"Int. Grueso",tagline:"El reciclador de agua",
+     desc:"1.5 metros que absorben agua y forman las heces. Aloja 100 billones de bacterias que forman el microbioma intestinal — ¡tu segundo cerebro!",
+     facts:[["🦠","Aloja 100 billones de bacterias beneficiosas"],["💧","Absorbe hasta 1.5 litros de agua por día"],["🧠","El microbioma afecta el estado de ánimo"]],
+     svgCode:`<path d="M50 65 Q80 30,150 32 Q220 34,250 65 Q260 90,240 110 Q220 128,150 125 Q80 128,60 110 Q40 90,50 65Z" fill="rgba(245,158,11,.12)" stroke="#f59e0b" stroke-width="2"/><path d="M75 50 Q95 42,120 48" fill="none" stroke="#fbbf24" stroke-width="1.5"/><path d="M180 48 Q205 42,225 50" fill="none" stroke="#fbbf24" stroke-width="1.5"/><circle cx="150" cy="78" r="18" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="1.5"/><text x="150" y="82" text-anchor="middle" fill="#fcd34d" font-size="10">🦠 x100B</text>` }
+  ],
+  quiz: [
+    {q:"¿Cuánto mide el intestino delgado?",opts:["2 metros","4 metros","6-7 metros","10 metros"],ans:2,exp:"¡El intestino delgado mide entre 6 y 7 metros de longitud!"},
+    {q:"¿Cuánto tarda la digestión completa?",opts:["6 horas","12 horas","24-48 horas","72 horas"],ans:2,exp:"La digestión completa tarda entre 24 y 48 horas dependiendo de la comida."},
+    {q:"¿Qué produce el estómago para digerir?",opts:["Agua oxigenada","Ácido clorhídrico","Bicarbonato","Enzimas de carbono"],ans:1,exp:"¡El estómago produce ácido clorhídrico con pH 1.5-3.5 para digerir proteínas!"},
+    {q:"¿Cuántos litros de saliva produces por día?",opts:["0.3 litros","0.8 litros","1.5 litros","3 litros"],ans:2,exp:"¡Produces aproximadamente 1.5 litros de saliva cada día!"},
+    {q:"¿Dónde se absorbe la mayoría de los nutrientes?",opts:["Estómago","Intestino delgado","Intestino grueso","Esófago"],ans:1,exp:"¡El intestino delgado absorbe el 90% de los nutrientes gracias a sus vellosidades!"}
+  ],
+  facts: [
+    {em:"🍕",txt:"Tu comida viaja 9 metros desde la boca hasta el final del tracto digestivo"},
+    {em:"⚗️",txt:"El ácido del estómago es tan fuerte que podría disolver una lámina de zinc"},
+    {em:"🦠",txt:"En tu intestino hay más bacterias que células en todo tu cuerpo"},
+    {em:"💧",txt:"El intestino grueso absorbe hasta 1.5 litros de agua al día"},
+    {em:"🔄",txt:"La mucosa del estómago se renueva completamente cada 3-4 días"},
+    {em:"🧵",txt:"Si desenrollaras tu intestino delgado, mediría como una cancha de baloncesto"},
+    {em:"⏱️",txt:"El peristaltismo mueve comida aunque estés parado de cabeza"},
+    {em:"😮",txt:"La digestión comienza incluso antes de comer — con solo ver la comida"}
+  ]
+};
+function renderComponents(){document.getElementById('comp-grid').innerHTML=SYS.components.map((c,i)=>`<div class="comp-card" onclick="openModal(${i})" tabindex="0" role="button" onkeydown="if(event.key='Enter')openModal(${i})"><div class="comp-emoji">${c.emoji}</div><div class="comp-name">${c.name}</div><div class="comp-tag">${c.tagline}</div><span class="comp-arrow">→</span></div>`).join('')}
+function openModal(i){const c=SYS.components[i];document.getElementById('modal-emoji').textContent=c.emoji;document.getElementById('modal-name').textContent=c.name;document.getElementById('modal-tagline').textContent=c.tagline;document.getElementById('modal-svg').innerHTML=c.svgCode;document.getElementById('modal-desc').textContent=c.desc;document.getElementById('modal-facts').innerHTML=c.facts.map(f=>`<div class="modal-fact"><span class="modal-fact-icon">${f[0]}</span><span>${f[1]}</span></div>`).join('');document.getElementById('modal-overlay').classList.add('open')}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open')}
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('modal-overlay'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+let qIdx=0,score=0,answered=false;
+function renderQuiz(){document.getElementById('quiz-progress').innerHTML=SYS.quiz.map((_,i)=>`<div class="quiz-dot ${i<qIdx?'done':i===qIdx?'active':''}"></div>`).join('');if(qIdx>=SYS.quiz.length){document.getElementById('quiz-body').innerHTML=`<div class="quiz-score"><div class="quiz-score-num">${score}/${SYS.quiz.length}</div><div class="quiz-score-lbl">${score>=4?'🎉 ¡Excelente!':score>=2?'👏 ¡Bien hecho!':'💪 ¡Sigue practicando!'}</div><button class="quiz-retry" onclick="qIdx=0;score=0;answered=false;renderQuiz()">🔄 Intentar de nuevo</button></div>`;return;}const q=SYS.quiz[qIdx];document.getElementById('quiz-body').innerHTML=`<div class="quiz-q">Pregunta ${qIdx+1}: ${q.q}</div><div class="quiz-opts">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQ(${i})">${o}</button>`).join('')}</div><div class="quiz-feedback" id="quiz-fb" style="display:none"></div><button class="quiz-next" id="quiz-next" onclick="qIdx++;answered=false;renderQuiz()" style="display:none">Siguiente →</button>`}
+function answerQ(i){if(answered)return;answered=true;const q=SYS.quiz[qIdx],correct=i===q.ans;if(correct)score++;document.querySelectorAll('.quiz-opt').forEach((el,idx)=>{el.disabled=true;if(idx===q.ans)el.classList.add('correct');else if(idx===i&&!correct)el.classList.add('wrong')});const fb=document.getElementById('quiz-fb');fb.style.display='block';fb.className='quiz-feedback '+(correct?'ok':'fail');fb.textContent=correct?'✅ '+q.exp:'❌ Correcto: '+q.opts[q.ans]+'. '+q.exp;document.getElementById('quiz-next').style.display='inline-flex'}
+renderComponents();renderQuiz();
+document.getElementById('facts-track').innerHTML=SYS.facts.map(f=>`<div class="fact-card"><div class="fact-em">${f.em}</div><p class="fact-txt">${f.txt}</p></div>`).join('');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.appear').forEach(el=>io.observe(el));
+const ham=document.getElementById('ham'),menu=document.getElementById('nav-menu');
+ham.addEventListener('click',()=>menu.classList.toggle('open'));
+document.addEventListener('click',e=>{if(!ham.contains(e.target)&&!menu.contains(e.target))menu.classList.remove('open')});
+</script>
+</body>
+</html>

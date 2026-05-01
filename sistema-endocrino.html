@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnatomíaViva — Sistema Endocrino</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c1:#f59e0b;--c2:#fbbf24;--cg:linear-gradient(135deg,#f59e0b,#fbbf24);--cb:rgba(245,158,11,.12);--cs:rgba(245,158,11,.28);--ct:#fde68a;--bg:#07071a;--glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);--tx:#f0f0ff;--tx2:rgba(240,240,255,.6)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:58px;background:rgba(7,7,26,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--gb)}
+.nav-brand{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-sys{font-size:.85rem;font-weight:600;color:var(--ct);background:var(--cb);border:1px solid var(--cs);padding:5px 14px;border-radius:100px}
+.nav-menu{display:flex;list-style:none;gap:20px;align-items:center}
+.nav-menu a{color:var(--tx2);text-decoration:none;font-size:.86rem;font-weight:500;transition:color .2s}
+.nav-menu a:hover{color:var(--tx)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-ham span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px}
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 40px;position:relative;overflow:hidden}
+.hero-svg-wrap{width:min(400px,88vw);height:min(290px,62vw);margin-bottom:28px}
+.hero-svg-wrap svg{width:100%;height:100%}
+.hero-stat{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.8rem,8vw,5rem);background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px;animation:fadeU .8s ease both}
+.hero-stat-lbl{font-size:.9rem;color:var(--tx2);margin-bottom:20px;animation:fadeU .8s ease .1s both}
+.hero-title{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,3rem);line-height:1.1;margin-bottom:10px;animation:fadeU .8s ease .2s both}
+.hero-sub{color:var(--tx2);font-size:1rem;max-width:430px;margin-bottom:32px;animation:fadeU .8s ease .3s both}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;background:var(--cg);color:#111;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;padding:13px 30px;border-radius:100px;text-decoration:none;box-shadow:0 0 36px rgba(245,158,11,.4);transition:transform .25s;animation:fadeU .8s ease .4s both}
+.hero-btn:hover{transform:translateY(-3px) scale(1.03)}
+/* SECTIONS */
+.section{padding:64px 24px;max-width:1100px;margin:0 auto}
+.sec-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:10px;text-align:center}
+.sec-sub{color:var(--tx2);text-align:center;margin-bottom:40px;font-size:.95rem}
+/* COMPONENTS */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.comp-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:24px;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;overflow:hidden}
+.comp-card:hover{transform:translateY(-5px);border-color:var(--cs);box-shadow:0 12px 40px rgba(245,158,11,.2)}
+.comp-emoji{font-size:2.5rem;margin-bottom:12px}
+.comp-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:var(--ct)}
+.comp-tag{font-size:.78rem;color:var(--tx2)}
+.comp-arrow{position:absolute;bottom:16px;right:16px;font-size:1.2rem;color:var(--ct);transition:transform .2s}
+.comp-card:hover .comp-arrow{transform:translateX(4px)}
+/* TIMO SPOTLIGHT */
+.timo-section{padding:0 24px 64px;max-width:1100px;margin:0 auto}
+.timo-card{background:var(--glass);border:2px solid rgba(245,158,11,.35);border-radius:28px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.timo-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(245,158,11,.07),transparent 70%);pointer-events:none}
+.timo-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);color:#fde68a;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:16px}
+.timo-title{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;margin-bottom:12px}
+.timo-desc{color:var(--tx2);line-height:1.7;font-size:.95rem;margin-bottom:20px}
+.timo-facts{display:flex;flex-direction:column;gap:10px}
+.timo-fact{display:flex;align-items:flex-start;gap:10px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.18);border-radius:12px;padding:12px 14px;font-size:.87rem;color:var(--tx2);line-height:1.5}
+.timo-fact-ico{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+.timo-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.timo-stat{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:16px;padding:20px 16px;text-align:center}
+.timo-stat-val{font-family:'Poppins',sans-serif;font-weight:900;font-size:1.8rem;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:4px}
+.timo-stat-lbl{font-size:.78rem;color:var(--tx2);line-height:1.4}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#0f0f2a;border:1px solid var(--cs);border-radius:24px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;padding:32px;position:relative;transform:translateY(20px) scale(.97);transition:transform .3s;scrollbar-width:thin;scrollbar-color:var(--cs) transparent}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.07);border:none;color:var(--tx);font-size:1.2rem;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(255,255,255,.14)}
+.modal-emoji{font-size:3.5rem;margin-bottom:12px}
+.modal-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.6rem;margin-bottom:6px;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-tagline{color:var(--tx2);font-size:.9rem;margin-bottom:16px}
+.modal-svg{width:100%;max-height:160px;margin-bottom:20px;border-radius:12px;background:var(--cb);padding:12px}
+.modal-desc{font-size:.95rem;line-height:1.65;color:var(--tx);margin-bottom:20px}
+.modal-facts{display:flex;flex-direction:column;gap:10px}
+.modal-fact{display:flex;align-items:flex-start;gap:10px;background:var(--cb);border:1px solid var(--cs);border-radius:12px;padding:12px 14px;font-size:.87rem;color:var(--tx2)}
+.modal-fact-icon{font-size:1.2rem;flex-shrink:0}
+/* QUIZ */
+.quiz-wrap{background:var(--glass);border:1px solid var(--gb);border-radius:24px;padding:36px;max-width:640px;margin:0 auto}
+.quiz-progress{display:flex;gap:6px;margin-bottom:24px}
+.quiz-dot{flex:1;height:4px;border-radius:2px;background:var(--gb);transition:background .3s}
+.quiz-dot.done{background:var(--cg)}
+.quiz-dot.active{background:var(--c1)}
+.quiz-q{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.1rem;margin-bottom:20px;line-height:1.5}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.quiz-opt{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:14px 16px;cursor:pointer;font-size:.9rem;text-align:left;color:var(--tx);transition:all .2s;line-height:1.4}
+.quiz-opt:hover:not(:disabled){border-color:var(--c1);background:var(--cb);transform:translateY(-2px)}
+.quiz-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15);color:#6ee7b7}
+.quiz-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.12);color:#fca5a5}
+.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.9rem;padding:12px 16px;border-radius:12px;margin-bottom:16px;min-height:44px;line-height:1.5}
+.quiz-feedback.ok{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.quiz-feedback.fail{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+.quiz-next{display:inline-flex;align-items:center;gap:8px;background:var(--cg);color:#111;border:none;padding:11px 24px;border-radius:100px;font-size:.9rem;font-weight:700;cursor:pointer;transition:opacity .2s,transform .2s;font-family:'Poppins',sans-serif}
+.quiz-next:hover{opacity:.9;transform:translateY(-2px)}
+.quiz-score{text-align:center}
+.quiz-score-num{font-family:'Poppins',sans-serif;font-weight:900;font-size:4rem;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.quiz-score-lbl{color:var(--tx2);margin-bottom:20px;font-size:.95rem}
+.quiz-retry{background:var(--cb);border:1px solid var(--cs);color:var(--ct);padding:10px 22px;border-radius:100px;font-size:.9rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif}
+/* FACTS */
+.facts-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:none;cursor:grab}
+.facts-track:active{cursor:grabbing}
+.facts-track::-webkit-scrollbar{display:none}
+.fact-card{flex:0 0 180px;background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:18px 14px;scroll-snap-align:start;transition:transform .2s,border-color .2s}
+.fact-card:hover{transform:translateY(-4px);border-color:var(--cs)}
+.fact-em{font-size:2rem;margin-bottom:8px}
+.fact-txt{font-size:.82rem;color:var(--tx2);line-height:1.5}
+/* SYS NAV */
+.sys-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:40px 24px;max-width:1100px;margin:0 auto;border-top:1px solid var(--gb)}
+.sys-nav-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:.9rem;padding:10px 20px;border-radius:100px;border:1px solid var(--gb);color:var(--tx2);background:var(--glass);transition:all .25s}
+.sys-nav-btn:hover{border-color:var(--cs);color:var(--ct);background:var(--cb)}
+.sys-nav-home{color:var(--ct);border-color:var(--cs);background:var(--cb)}
+.footer{border-top:1px solid var(--gb);padding:24px;text-align:center;font-size:.8rem;color:var(--tx2)}
+/* ANIMATIONS */
+@keyframes fadeU{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes endoPulse{0%,100%{filter:drop-shadow(0 0 4px rgba(245,158,11,.4))}50%{filter:drop-shadow(0 0 18px rgba(245,158,11,.9))}}
+@keyframes timoGlow{0%,100%{opacity:.5}50%{opacity:1}}
+.appear{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.appear.in{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.timo-card{grid-template-columns:1fr}.quiz-opts{grid-template-columns:1fr}.nav-menu{display:none}.nav-ham{display:flex}.nav-menu.open{display:flex;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:rgba(7,7,26,.98);padding:12px 24px 20px;gap:12px;border-bottom:1px solid var(--gb)}}
+@media(max-width:480px){.comp-grid{grid-template-columns:1fr 1fr}.timo-stat-grid{grid-template-columns:1fr 1fr}}
+
+/* ── Hormonas principales ── */
+.hormones-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-bottom:16px}
+.horm-card{background:var(--glass);border:1px solid var(--gb);border-radius:22px;padding:26px;
+  position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.horm-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--hc,#f59e0b);border-radius:22px 22px 0 0}
+.horm-card:hover{transform:translateY(-6px);border-color:var(--hc,#f59e0b);box-shadow:0 16px 48px rgba(0,0,0,.35)}
+.horm-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.horm-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;flex-shrink:0;background:var(--hcb,rgba(245,158,11,.12));border:1px solid var(--hcb2,rgba(245,158,11,.25))}
+.horm-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:3px}
+.horm-alias{font-size:.78rem;color:var(--tx2)}
+.horm-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:13px}
+.horm-bar-lbl{font-size:.72rem;color:var(--tx2);min-width:58px}
+.horm-bar-track{flex:1;height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.horm-bar-fill{height:100%;border-radius:3px;background:var(--hc,#f59e0b);animation:hbGrow .9s ease both}
+@keyframes hbGrow{from{width:0%}}
+.horm-desc{font-size:.87rem;color:var(--tx2);line-height:1.67;margin-bottom:13px}
+.horm-facts{display:flex;flex-direction:column;gap:6px}
+.horm-fact{display:flex;align-items:flex-start;gap:8px;font-size:.81rem;color:var(--tx2);
+  padding:7px 10px;background:rgba(255,255,255,.03);border-radius:9px;border:1px solid rgba(255,255,255,.05);line-height:1.45}
+.horm-fact-ico{flex-shrink:0;margin-top:1px}
+/* ── Eje H-H ── */
+.eje-section{padding:0 24px 64px;max-width:900px;margin:0 auto}
+.eje-card{background:var(--glass);border:1px solid rgba(245,158,11,.25);border-radius:24px;padding:36px;
+  display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.eje-desc{font-size:.92rem;color:var(--tx2);line-height:1.72;margin-bottom:18px}
+.eje-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;
+  background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:12px;padding:12px 14px}
+.eje-step-num{width:26px;height:26px;border-radius:50%;background:var(--cg);color:#111;
+  font-family:'Poppins',sans-serif;font-weight:700;font-size:.85rem;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0}
+.eje-step-txt{font-size:.86rem;color:var(--tx2);line-height:1.5}
+.eje-step-txt strong{color:var(--ct)}
+/* ── Enfermedades ── */
+.dis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.dis-card{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:22px;
+  transition:transform .25s,border-color .25s}
+.dis-card:hover{transform:translateY(-4px);border-color:rgba(245,158,11,.35)}
+.dis-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.dis-ico{font-size:2rem}
+.dis-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;color:var(--ct)}
+.dis-gland{font-size:.75rem;color:var(--tx2);margin-top:2px}
+.dis-desc{font-size:.85rem;color:var(--tx2);line-height:1.6;margin-bottom:10px}
+.dis-tag{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;
+  padding:3px 10px;border-radius:100px;background:var(--cb);border:1px solid var(--cs);color:var(--ct)}
+@media(max-width:768px){.eje-card{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-brand" href="index.html">🧬 AnatomíaViva</a>
+  <ul class="nav-menu" id="nav-menu">
+    <li><span class="nav-sys">⚗️ Endocrino</span></li>
+    <li><a href="#timo">El Timo</a></li>
+    <li><a href="#glandulas">Glándulas</a></li>
+    <li><a href="#hormonas">Hormonas</a></li>
+    <li><a href="#eje">Eje H-H</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="index.html">Inicio</a></li>
+  </ul>
+  <button class="nav-ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-svg-wrap" style="animation:fadeU .9s ease both">
+    <svg viewBox="0 0 400 280" fill="none" style="animation:endoPulse 3s ease-in-out infinite">
+      <!-- Silueta cuerpo -->
+      <path d="M200 20 Q172 20,160 36 Q148 52,152 72 Q140 76,132 88 Q120 105,124 128 Q128 148,148 156 L148 200 Q148 220,160 228 L160 270 M200 20 Q228 20,240 36 Q252 52,248 72 Q260 76,268 88 Q280 105,276 128 Q272 148,252 156 L252 200 Q252 220,240 228 L240 270"
+            fill="none" stroke="rgba(245,158,11,.12)" stroke-width="1.5"/>
+      <!-- Cabeza -->
+      <circle cx="200" cy="18" r="18" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/>
+      <!-- Hipófisis (cerebro) -->
+      <circle cx="200" cy="18" r="6" fill="rgba(245,158,11,.5)" stroke="#f59e0b" stroke-width="1.5">
+        <animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Tiroides (mariposa) cuello -->
+      <path d="M180 62 Q172 55,176 50 Q182 44,188 52 Q193 58,200 60 Q207 58,212 52 Q218 44,224 50 Q228 55,220 62 Q212 67,200 65 Q188 67,180 62Z"
+            fill="rgba(245,158,11,.22)" stroke="#fbbf24" stroke-width="2"/>
+      <!-- TIMO (pecho, destacado) -->
+      <path d="M176 88 Q168 82,170 96 Q172 115,200 122 Q228 115,230 96 Q232 82,224 88 Q216 96,200 98 Q184 96,176 88Z"
+            fill="rgba(245,158,11,.3)" stroke="#f59e0b" stroke-width="2.5">
+        <animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <text x="200" y="107" text-anchor="middle" fill="#fde68a" font-family="Poppins,sans-serif" font-size="10" font-weight="700">TIMO</text>
+      <!-- Corazón indicador debajo del timo -->
+      <path d="M200 118 L190 126 C184 120,182 112,188 108 C192 105,196 107,200 113 C204 107,208 105,212 108 C218 112,216 120,210 126Z"
+            fill="rgba(245,158,11,.15)" stroke="rgba(245,158,11,.4)" stroke-width="1"/>
+      <!-- Suprarrenales -->
+      <path d="M152 156 Q144 150,146 142 Q152 134,160 140 Q166 148,162 158Z" fill="rgba(245,158,11,.25)" stroke="#fbbf24" stroke-width="1.8"/>
+      <path d="M248 156 Q256 150,254 142 Q248 134,240 140 Q234 148,238 158Z" fill="rgba(245,158,11,.25)" stroke="#fbbf24" stroke-width="1.8"/>
+      <!-- Páncreas -->
+      <path d="M164 172 Q200 165,236 172 Q242 175,236 180 Q200 172,164 180 Q158 175,164 172Z"
+            fill="rgba(245,158,11,.2)" stroke="#fbbf24" stroke-width="1.5"/>
+      <!-- Ovarios/Testículos (gónadas) -->
+      <ellipse cx="186" cy="210" rx="12" ry="9" fill="rgba(245,158,11,.15)" stroke="rgba(245,158,11,.4)" stroke-width="1.3"/>
+      <ellipse cx="214" cy="210" rx="12" ry="9" fill="rgba(245,158,11,.15)" stroke="rgba(245,158,11,.4)" stroke-width="1.3"/>
+      <!-- Líneas de señal hormonal desde hipófisis -->
+      <line x1="200" y1="24" x2="200" y2="55" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,3" opacity=".7"/>
+      <line x1="196" y1="24" x2="168" y2="55" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3" opacity=".5"/>
+      <line x1="204" y1="24" x2="232" y2="55" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3" opacity=".5"/>
+      <line x1="200" y1="65" x2="200" y2="88" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="3,3" opacity=".6"/>
+      <!-- Nodos de señal -->
+      <circle cx="152" cy="148" r="4" fill="#f59e0b"><animate attributeName="r" values="3;6;3" dur="2.2s" repeatCount="indefinite"/></circle>
+      <circle cx="248" cy="148" r="4" fill="#f59e0b"><animate attributeName="r" values="3;6;3" dur="1.9s" repeatCount="indefinite"/></circle>
+      <circle cx="200" cy="168" r="4" fill="#fbbf24"><animate attributeName="r" values="3;5;3" dur="2.5s" repeatCount="indefinite"/></circle>
+      <!-- Labels -->
+      <text x="136" y="148" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Suprarenal</text>
+      <text x="264" y="148" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Suprarenal</text>
+      <text x="200" y="195" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Páncreas</text>
+      <text x="200" y="228" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Gónadas</text>
+    </svg>
+  </div>
+  <div class="hero-stat">50+ hormonas</div>
+  <div class="hero-stat-lbl">coordinando silenciosamente cada función de tu cuerpo</div>
+  <h1 class="hero-title">El <span style="background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">director invisible</span> de tu cuerpo</h1>
+  <p class="hero-sub">Sin nervios, sin cables: solo moléculas mensajeras viajando por tu sangre para coordinar todo lo que eres.</p>
+  <a href="#timo" class="hero-btn">🔬 Explorar el Timo primero</a>
+</section>
+
+<!-- TIMO SPOTLIGHT -->
+<section class="timo-section appear" id="timo">
+  <div style="text-align:center;margin-bottom:36px">
+    <h2 class="sec-title">⭐ El Timo — El entrenador inmune</h2>
+    <p class="sec-sub">La glándula más importante que nadie conoce</p>
+  </div>
+  <div class="timo-card">
+    <div>
+      <div class="timo-badge">⭐ Glándula destacada</div>
+      <h3 class="timo-title">El Timo:<br>academia de <span style="background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">guerreros</span></h3>
+      <p class="timo-desc">Entre el corazón y el esternón vive el timo, la glándula donde los linfocitos T reciben su entrenamiento antes de patrullar el cuerpo. Alcanza su máximo peso (~40g) en la pubertad y luego se encoge lentamente — hace su trabajo más crítico justo cuando eres joven.</p>
+      <div class="timo-facts">
+        <div class="timo-fact"><span class="timo-fact-ico">⚔️</span><span>Entrena a los linfocitos T para atacar gérmenes sin dañar las células propias</span></div>
+        <div class="timo-fact"><span class="timo-fact-ico">📉</span><span>Tras la pubertad se atrofia gradualmente — proceso llamado involución tímica</span></div>
+        <div class="timo-fact"><span class="timo-fact-ico">⚗️</span><span>Produce timosina y timulina, hormonas que maduran los linfocitos T</span></div>
+      </div>
+    </div>
+    <div>
+      <svg viewBox="0 0 300 260" fill="none" style="width:100%;max-height:260px;animation:endoPulse 3s ease-in-out infinite">
+        <!-- Esternón -->
+        <rect x="132" y="20" width="36" height="160" rx="10" fill="rgba(200,200,220,.08)" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <!-- Costillas izq -->
+        <path d="M132 50 Q90 55,78 70" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <path d="M132 75 Q88 80,74 96" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <path d="M132 100 Q86 105,70 122" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <path d="M132 125 Q88 130,74 147" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <!-- Costillas der -->
+        <path d="M168 50 Q210 55,222 70" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <path d="M168 75 Q212 80,226 96" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <path d="M168 100 Q214 105,230 122" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <path d="M168 125 Q212 130,226 147" fill="none" stroke="rgba(200,200,220,.2)" stroke-width="1.5"/>
+        <!-- Corazón detrás -->
+        <path d="M150 210 L114 182 C96 166,100 140,116 132 C126 126,138 130,150 144 C162 130,174 126,184 132 C200 140,204 166,186 182Z"
+              fill="rgba(255,23,68,.08)" stroke="rgba(255,23,68,.2)" stroke-width="1.5"/>
+        <!-- TIMO (destacado, grande) -->
+        <path d="M122 60 Q108 52,112 76 Q116 108,150 120 Q184 108,188 76 Q192 52,178 60 Q166 72,150 75 Q134 72,122 60Z"
+              fill="rgba(245,158,11,.25)" stroke="#f59e0b" stroke-width="2.5">
+          <animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/>
+        </path>
+        <!-- Lóbulo izq -->
+        <path d="M130 65 Q120 60,122 75 Q125 92,140 100 Q150 104,150 100 Q140 90,136 75 Q134 63,130 65Z"
+              fill="rgba(245,158,11,.35)" stroke="#fbbf24" stroke-width="1.5"/>
+        <!-- Lóbulo der -->
+        <path d="M170 65 Q180 60,178 75 Q175 92,160 100 Q150 104,150 100 Q160 90,164 75 Q166 63,170 65Z"
+              fill="rgba(245,158,11,.35)" stroke="#fbbf24" stroke-width="1.5"/>
+        <!-- Texto TIMO -->
+        <text x="150" y="88" text-anchor="middle" fill="#fde68a" font-family="Poppins,sans-serif" font-size="13" font-weight="900">TIMO</text>
+        <!-- Linfocitos T saliendo -->
+        <circle cx="106" cy="90" r="5" fill="rgba(245,158,11,.7)"><animate attributeName="cx" values="120;80;50" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;0" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="194" cy="90" r="5" fill="rgba(245,158,11,.7)"><animate attributeName="cx" values="180;220;250" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;0" dur="3.5s" repeatCount="indefinite"/></circle>
+        <circle cx="150" cy="125" r="4" fill="rgba(245,158,11,.7)"><animate attributeName="cy" values="120;160;200" dur="2.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;0" dur="2.8s" repeatCount="indefinite"/></circle>
+        <!-- Etiquetas -->
+        <text x="150" y="240" text-anchor="middle" fill="rgba(253,230,138,.5)" font-size="11">Linfocitos T entrenados →</text>
+        <text x="150" y="255" text-anchor="middle" fill="rgba(253,230,138,.35)" font-size="9">Patrullan todo el cuerpo</text>
+        <!-- Señal hormonal timosina -->
+        <text x="68" y="115" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Timosina</text>
+        <text x="232" y="115" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Timulina</text>
+      </svg>
+      <div class="timo-stat-grid" style="margin-top:20px">
+        <div class="timo-stat"><div class="timo-stat-val">~40g</div><div class="timo-stat-lbl">Peso máximo en la pubertad</div></div>
+        <div class="timo-stat"><div class="timo-stat-val">2</div><div class="timo-stat-lbl">Lóbulos: izquierdo y derecho</div></div>
+        <div class="timo-stat"><div class="timo-stat-val">95%</div><div class="timo-stat-lbl">De linfocitos T son eliminados en el timo (aprenden o mueren)</div></div>
+        <div class="timo-stat"><div class="timo-stat-val">0g</div><div class="timo-stat-lbl">Peso en la vejez — se convierte en tejido graso</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLÁNDULAS -->
+<section class="section appear" id="glandulas">
+  <h2 class="sec-title">🏛️ Glándulas del sistema</h2>
+  <p class="sec-sub">Haz clic en cada glándula para explorar su función</p>
+  <div class="comp-grid" id="comp-grid"></div>
+</section>
+
+<!-- HORMONAS PRINCIPALES -->
+<section class="section appear" id="hormonas">
+  <h2 class="sec-title">💊 Hormonas principales</h2>
+  <p class="sec-sub">Las moléculas mensajeras que regulan silenciosamente cada segundo de tu vida</p>
+  <div class="hormones-grid">
+
+    <!-- Cortisol -->
+    <div class="horm-card" style="--hc:#f59e0b;--hcb:rgba(245,158,11,.12);--hcb2:rgba(245,158,11,.28)">
+      <div class="horm-head">
+        <div class="horm-ico">😰</div>
+        <div><div class="horm-name">Cortisol</div><div class="horm-alias">⚡ La hormona del estrés</div></div>
+      </div>
+      <div class="horm-bar-row">
+        <span class="horm-bar-lbl">Impacto</span>
+        <div class="horm-bar-track"><div class="horm-bar-fill" style="width:90%"></div></div>
+        <span style="font-size:.71rem;color:var(--tx2)">90%</span>
+      </div>
+      <p class="horm-desc">Producido por las glándulas suprarrenales, el cortisol es la hormona de alarma del cuerpo. Sube la glucosa en sangre, suprime el sistema inmune temporalmente y moviliza energía para enfrentar amenazas reales o percibidas.</p>
+      <div class="horm-facts">
+        <div class="horm-fact"><span class="horm-fact-ico">🌅</span><span>Está en su pico máximo al despertar (7-8am) y cae durante el día</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">⚠️</span><span>El estrés crónico mantiene el cortisol alto — daña la memoria y el sistema inmune</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🏋️</span><span>El ejercicio intenso lo dispara, pero el ejercicio regular lo normaliza a largo plazo</span></div>
+      </div>
+    </div>
+
+    <!-- Insulina -->
+    <div class="horm-card" style="--hc:#10b981;--hcb:rgba(16,185,129,.12);--hcb2:rgba(16,185,129,.28)">
+      <div class="horm-head">
+        <div class="horm-ico">🍬</div>
+        <div><div class="horm-name">Insulina</div><div class="horm-alias">🔑 La llave del azúcar</div></div>
+      </div>
+      <div class="horm-bar-row">
+        <span class="horm-bar-lbl">Impacto</span>
+        <div class="horm-bar-track"><div class="horm-bar-fill" style="width:95%;background:#10b981"></div></div>
+        <span style="font-size:.71rem;color:var(--tx2)">95%</span>
+      </div>
+      <p class="horm-desc">Producida por el páncreas, la insulina actúa como una llave que abre las células para que la glucosa entre y sea usada como energía. Sin insulina, la glucosa se acumula en la sangre causando daño a órganos y vasos.</p>
+      <div class="horm-facts">
+        <div class="horm-fact"><span class="horm-fact-ico">🩸</span><span>La diabetes tipo 1 ocurre cuando el sistema inmune destruye las células que la producen</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🍕</span><span>El páncreas la libera en minutos tras cada comida, ajustando la dosis exacta</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🧠</span><span>El cerebro consume glucosa de forma constante — sin insulina adecuada se nubla la mente</span></div>
+      </div>
+    </div>
+
+    <!-- Adrenalina -->
+    <div class="horm-card" style="--hc:#ef4444;--hcb:rgba(239,68,68,.12);--hcb2:rgba(239,68,68,.28)">
+      <div class="horm-head">
+        <div class="horm-ico">⚡</div>
+        <div><div class="horm-name">Adrenalina</div><div class="horm-alias">🚀 La hormona de emergencia</div></div>
+      </div>
+      <div class="horm-bar-row">
+        <span class="horm-bar-lbl">Impacto</span>
+        <div class="horm-bar-track"><div class="horm-bar-fill" style="width:88%;background:#ef4444"></div></div>
+        <span style="font-size:.71rem;color:var(--tx2)">88%</span>
+      </div>
+      <p class="horm-desc">Secretada por la médula suprarrenal en situaciones de peligro o emoción intensa. En 0.2 segundos acelera el corazón, dilata las pupilas, redirige la sangre a los músculos y aumenta la fuerza disponible al límite.</p>
+      <div class="horm-facts">
+        <div class="horm-fact"><span class="horm-fact-ico">💪</span><span>Puede generar fuerza sobrehumana temporal — casos documentados de personas que levantan autos</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">👁️</span><span>Dilata las pupilas para mejorar la visión en situaciones de peligro</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🏥</span><span>En medicina se usa para tratar reacciones alérgicas severas (anafilaxis)</span></div>
+      </div>
+    </div>
+
+    <!-- Hormona del Crecimiento -->
+    <div class="horm-card" style="--hc:#a855f7;--hcb:rgba(168,85,247,.12);--hcb2:rgba(168,85,247,.28)">
+      <div class="horm-head">
+        <div class="horm-ico">📏</div>
+        <div><div class="horm-name">Hormona del Crecimiento</div><div class="horm-alias">🌱 GH — el constructor</div></div>
+      </div>
+      <div class="horm-bar-row">
+        <span class="horm-bar-lbl">Impacto</span>
+        <div class="horm-bar-track"><div class="horm-bar-fill" style="width:82%;background:#a855f7"></div></div>
+        <span style="font-size:.71rem;color:var(--tx2)">82%</span>
+      </div>
+      <p class="horm-desc">La hipófisis la secreta en pulsos durante el sueño profundo. Estimula el crecimiento óseo y muscular, regula el metabolismo de grasas y proteínas, y es crucial durante la infancia y adolescencia.</p>
+      <div class="horm-facts">
+        <div class="horm-fact"><span class="horm-fact-ico">💤</span><span>El 70% de la GH diaria se secreta durante las primeras horas de sueño profundo</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🦴</span><span>Actúa sobre las placas de crecimiento de los huesos largos hasta que se cierran</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🏋️</span><span>El ejercicio de fuerza triplica su secreción — por eso el músculo crece al dormir</span></div>
+      </div>
+    </div>
+
+    <!-- Estrógenos y Testosterona -->
+    <div class="horm-card" style="--hc:#ec4899;--hcb:rgba(236,72,153,.12);--hcb2:rgba(236,72,153,.28)">
+      <div class="horm-head">
+        <div class="horm-ico">🧬</div>
+        <div><div class="horm-name">Hormonas Sexuales</div><div class="horm-alias">♀♂ Estrógenos y Testosterona</div></div>
+      </div>
+      <div class="horm-bar-row">
+        <span class="horm-bar-lbl">Impacto</span>
+        <div class="horm-bar-track"><div class="horm-bar-fill" style="width:93%;background:#ec4899"></div></div>
+        <span style="font-size:.71rem;color:var(--tx2)">93%</span>
+      </div>
+      <p class="horm-desc">Producidas en ovarios (estrógenos) y testículos (testosterona), aunque ambos sexos tienen ambas hormonas en proporciones distintas. Moldean el cuerpo, el estado de ánimo, la libido, la densidad ósea y el pensamiento.</p>
+      <div class="horm-facts">
+        <div class="horm-fact"><span class="horm-fact-ico">🦴</span><span>Los estrógenos protegen los huesos — la menopausia los baja y aumenta el riesgo de osteoporosis</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🧠</span><span>La testosterona también la producen las mujeres — influye en la concentración y la energía</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">😠</span><span>Los cambios de humor en la adolescencia se deben a los picos de estas hormonas</span></div>
+      </div>
+    </div>
+
+    <!-- Melatonina -->
+    <div class="horm-card" style="--hc:#6366f1;--hcb:rgba(99,102,241,.12);--hcb2:rgba(99,102,241,.28)">
+      <div class="horm-head">
+        <div class="horm-ico">🌙</div>
+        <div><div class="horm-name">Melatonina</div><div class="horm-alias">💤 La hormona del sueño</div></div>
+      </div>
+      <div class="horm-bar-row">
+        <span class="horm-bar-lbl">Impacto</span>
+        <div class="horm-bar-track"><div class="horm-bar-fill" style="width:78%;background:#6366f1"></div></div>
+        <span style="font-size:.71rem;color:var(--tx2)">78%</span>
+      </div>
+      <p class="horm-desc">Secretada por la glándula pineal en respuesta a la oscuridad. No provoca el sueño directamente sino que señala al cuerpo que es hora de prepararse para dormir, bajando la temperatura corporal y la alerta.</p>
+      <div class="horm-facts">
+        <div class="horm-fact"><span class="horm-fact-ico">📱</span><span>La luz azul de pantallas la suprime hasta 3 horas — el cerebro cree que sigue siendo de día</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🌅</span><span>Empieza a subir 2 horas antes de dormir si no hay luz artificial intensa</span></div>
+        <div class="horm-fact"><span class="horm-fact-ico">🦠</span><span>También actúa como antioxidante y tiene propiedades inmunomoduladoras</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EJE HIPOTÁLAMO-HIPÓFISIS -->
+<section class="eje-section appear" id="eje">
+  <div style="text-align:center;margin-bottom:36px">
+    <h2 class="sec-title">🔄 El eje Hipotálamo-Hipófisis</h2>
+    <p class="sec-sub">El sistema de mando y retroalimentación que coordina todo el sistema endocrino</p>
+  </div>
+  <div class="eje-card">
+    <div>
+      <p class="eje-desc">El sistema endocrino no funciona con mandatos directos sino con <strong style="color:var(--ct)">retroalimentación negativa</strong>: como el termostato de tu casa. Cuando una hormona sube demasiado, el hipotálamo y la hipófisis reciben la señal y frenan su producción. Cuando baja demasiado, la estimulan.</p>
+      <p class="eje-desc" style="margin-bottom:24px">Este eje es la autopista principal del control endocrino y pasa por tres etapas:</p>
+      <div class="eje-step">
+        <div class="eje-step-num">1</div>
+        <div class="eje-step-txt"><strong>Hipotálamo detecta</strong> un desequilibrio (temperatura, glucosa, estrés) y secreta una hormona liberadora (ej: CRH para el cortisol).</div>
+      </div>
+      <div class="eje-step">
+        <div class="eje-step-num">2</div>
+        <div class="eje-step-txt"><strong>Hipófisis recibe la señal</strong> y libera su propia hormona estimulante (ej: ACTH) hacia la glándula diana a través de la sangre.</div>
+      </div>
+      <div class="eje-step">
+        <div class="eje-step-num">3</div>
+        <div class="eje-step-txt"><strong>Glándula diana actúa</strong> (ej: suprarrenal libera cortisol). Cuando el nivel es suficiente, la señal viaja de vuelta al hipotálamo para <strong>frenar</strong> el ciclo.</div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <svg viewBox="0 0 260 340" fill="none" style="width:100%;max-width:260px;display:inline-block">
+        <!-- Hipotálamo -->
+        <rect x="80" y="10" width="100" height="44" rx="14" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="30" text-anchor="middle" fill="#fde68a" font-family="Poppins,sans-serif" font-size="10" font-weight="700">Hipotálamo</text>
+        <text x="130" y="46" text-anchor="middle" fill="rgba(253,230,138,.6)" font-size="9">Detecta desequilibrio</text>
+        <!-- Flecha H→H -->
+        <line x1="130" y1="54" x2="130" y2="88" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,3"/>
+        <polygon points="130,95 124,82 136,82" fill="#fbbf24"/>
+        <text x="148" y="76" fill="rgba(253,230,138,.7)" font-size="8">CRH →</text>
+        <!-- Hipófisis -->
+        <rect x="80" y="98" width="100" height="44" rx="14" fill="rgba(245,158,11,.2)" stroke="#fbbf24" stroke-width="2"/>
+        <text x="130" y="118" text-anchor="middle" fill="#fde68a" font-family="Poppins,sans-serif" font-size="10" font-weight="700">Hipófisis</text>
+        <text x="130" y="134" text-anchor="middle" fill="rgba(253,230,138,.6)" font-size="9">Amplifica la señal</text>
+        <!-- Flecha H→G -->
+        <line x1="130" y1="142" x2="130" y2="176" stroke="#fbbf24" stroke-width="2" stroke-dasharray="4,3"/>
+        <polygon points="130,183 124,170 136,170" fill="#fbbf24"/>
+        <text x="148" y="164" fill="rgba(253,230,138,.7)" font-size="8">ACTH →</text>
+        <!-- Glándula diana -->
+        <rect x="72" y="186" width="116" height="44" rx="14" fill="rgba(245,158,11,.22)" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="206" text-anchor="middle" fill="#fde68a" font-family="Poppins,sans-serif" font-size="10" font-weight="700">Glándula diana</text>
+        <text x="130" y="222" text-anchor="middle" fill="rgba(253,230,138,.6)" font-size="9">Ej: suprarrenal</text>
+        <!-- Flecha G→efecto -->
+        <line x1="130" y1="230" x2="130" y2="258" stroke="#f59e0b" stroke-width="2"/>
+        <polygon points="130,265 124,252 136,252" fill="#f59e0b"/>
+        <!-- Efecto -->
+        <rect x="88" y="268" width="84" height="34" rx="10" fill="rgba(245,158,11,.15)" stroke="rgba(245,158,11,.35)" stroke-width="1.5"/>
+        <text x="130" y="283" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="700">Hormona</text>
+        <text x="130" y="296" text-anchor="middle" fill="rgba(253,230,138,.6)" font-size="8">Ej: cortisol</text>
+        <!-- Retroalimentación negativa (flecha curva de vuelta) -->
+        <path d="M88 286 Q28 286,28 130 Q28 28,80 28" fill="none" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="5,3"/>
+        <polygon points="80,28 70,22 70,34" fill="#ef4444"/>
+        <text x="18" y="180" fill="#fca5a5" font-size="8" transform="rotate(-90,18,180)">Retroalimentación ⊖</text>
+        <!-- Pulso animado en las flechas -->
+        <circle r="4" fill="rgba(245,158,11,.8)">
+          <animateMotion dur="2s" repeatCount="indefinite" path="M130,54 L130,88"/>
+          <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="4" fill="rgba(245,158,11,.8)">
+          <animateMotion dur="2s" begin="0.7s" repeatCount="indefinite" path="M130,142 L130,176"/>
+          <animate attributeName="opacity" values="1;0;1" dur="2s" begin="0.7s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ENFERMEDADES DEL SISTEMA ENDOCRINO -->
+<section class="section appear" id="enfermedades">
+  <h2 class="sec-title">🏥 Cuando el sistema falla</h2>
+  <p class="sec-sub">Las enfermedades endocrinas más comunes y qué las causa</p>
+  <div class="dis-grid">
+
+    <div class="dis-card">
+      <div class="dis-head">
+        <div class="dis-ico">🍬</div>
+        <div>
+          <div class="dis-name">Diabetes Mellitus</div>
+          <div class="dis-gland">Glándula: Páncreas — Hormona: Insulina</div>
+        </div>
+      </div>
+      <p class="dis-desc">La más prevalente: tipo 1 (autoinmune, destruye las células beta) y tipo 2 (resistencia a la insulina por estilo de vida). La glucosa no entra a las células y daña vasos, nervios y órganos.</p>
+      <span class="dis-tag">537 millones de afectados en el mundo</span>
+    </div>
+
+    <div class="dis-card">
+      <div class="dis-head">
+        <div class="dis-ico">🦋</div>
+        <div>
+          <div class="dis-name">Hipotiroidismo</div>
+          <div class="dis-gland">Glándula: Tiroides — Hormona: T3 / T4</div>
+        </div>
+      </div>
+      <p class="dis-desc">La tiroides produce poco T3/T4, frenando el metabolismo. Síntomas: fatiga extrema, aumento de peso, frío constante, depresión. Es muy común y afecta más a mujeres.</p>
+      <span class="dis-tag">1 de cada 20 personas lo tiene</span>
+    </div>
+
+    <div class="dis-card">
+      <div class="dis-head">
+        <div class="dis-ico">😰</div>
+        <div>
+          <div class="dis-name">Síndrome de Cushing</div>
+          <div class="dis-gland">Glándula: Suprarrenal — Hormona: Cortisol</div>
+        </div>
+      </div>
+      <p class="dis-desc">Exceso crónico de cortisol. Causa obesidad central (cara de luna, joroba), hipertensión, diabetes secundaria, fragilidad ósea y supresión del sistema inmune.</p>
+      <span class="dis-tag">Raro pero grave si no se trata</span>
+    </div>
+
+    <div class="dis-card">
+      <div class="dis-head">
+        <div class="dis-ico">📏</div>
+        <div>
+          <div class="dis-name">Déficit de Hormona de Crecimiento</div>
+          <div class="dis-gland">Glándula: Hipófisis — Hormona: GH</div>
+        </div>
+      </div>
+      <p class="dis-desc">La hipófisis produce poca GH en la infancia, afectando el crecimiento y la composición corporal. Se trata con inyecciones de GH sintética durante los años de desarrollo.</p>
+      <span class="dis-tag">Tratable con diagnóstico temprano</span>
+    </div>
+
+    <div class="dis-card">
+      <div class="dis-head">
+        <div class="dis-ico">🌙</div>
+        <div>
+          <div class="dis-name">Trastorno del Sueño Circadiano</div>
+          <div class="dis-gland">Glándula: Pineal — Hormona: Melatonina</div>
+        </div>
+      </div>
+      <p class="dis-desc">La alteración del ritmo circadiano por luz artificial, trabajo nocturno o pantallas desincroniza la melatonina. Asociado a mayor riesgo de obesidad, depresión y enfermedades cardíacas.</p>
+      <span class="dis-tag">Afecta al 30% de la población</span>
+    </div>
+
+    <div class="dis-card">
+      <div class="dis-head">
+        <div class="dis-ico">🛡️</div>
+        <div>
+          <div class="dis-name">Inmunodeficiencia Tímica</div>
+          <div class="dis-gland">Glándula: Timo — Hormona: Timosina</div>
+        </div>
+      </div>
+      <p class="dis-desc">Cuando el timo no funciona (síndrome de DiGeorge), los linfocitos T no se desarrollan. El paciente queda muy vulnerable a infecciones y tumores. Puede tratarse con trasplante de tejido tímico.</p>
+      <span class="dis-tag">Raro — 1 en 4,000 nacimientos</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-emoji" class="modal-emoji"></div>
+    <div id="modal-name" class="modal-name"></div>
+    <div id="modal-tagline" class="modal-tagline"></div>
+    <svg id="modal-svg" class="modal-svg" viewBox="0 0 300 130"></svg>
+    <div id="modal-desc" class="modal-desc"></div>
+    <div id="modal-facts" class="modal-facts"></div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<section class="section appear" id="quiz">
+  <h2 class="sec-title">🧩 Mini Quiz</h2>
+  <p class="sec-sub">Pon a prueba lo que aprendiste — 5 preguntas</p>
+  <div class="quiz-wrap">
+    <div class="quiz-progress" id="quiz-progress"></div>
+    <div id="quiz-body"></div>
+  </div>
+</section>
+
+<!-- DATOS -->
+<section class="section appear" id="datos">
+  <h2 class="sec-title">🤯 Datos que te sorprenderán</h2>
+  <div class="facts-track" id="facts-track"></div>
+</section>
+
+<nav class="sys-nav">
+  <a href="sistema-renal.html" class="sys-nav-btn">← Anterior: Renal 💧</a>
+  <a href="index.html" class="sys-nav-btn sys-nav-home">🏠 Inicio</a>
+  <a href="sistema-nervioso.html" class="sys-nav-btn">Ir a: Nervioso 🧠 →</a>
+</nav>
+<footer class="footer">🧬 AnatomíaViva — Plataforma educativa interactiva</footer>
+
+<script>
+var SYS = {
+  components:[
+    {id:"hipofisis",emoji:"🧠",name:"Hipófisis",tagline:"La glándula maestra",
+     desc:"Glándula del tamaño de un guisante ubicada en la base del cerebro. Controla casi todas las demás glándulas del cuerpo produciendo hormonas reguladoras. Tiene dos lóbulos: anterior (adenohipófisis) y posterior (neurohipófisis).",
+     facts:[["📏","Mide apenas 1 cm y pesa 0.5g — pero controla todo el sistema"],["🎯","Produce GH (crecimiento), TSH (tiroides), FSH/LH (gónadas) y más"],["🔗","Recibe órdenes del hipotálamo y las transmite al resto del cuerpo"]],
+     svgCode:'<ellipse cx="150" cy="65" rx="38" ry="30" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2.5"/><path d="M150 35 L150 20" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/><circle cx="150" cy="15" r="10" fill="rgba(245,158,11,.15)" stroke="#fbbf24" stroke-width="1.5"/><text x="150" y="19" text-anchor="middle" fill="#fde68a" font-size="8">Hipot.</text><text x="150" y="60" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="bold">Hipófisis</text><text x="150" y="74" text-anchor="middle" fill="rgba(253,230,138,.6)" font-size="9">~1 cm</text><path d="M112 65 L60 40" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2"/><path d="M112 70 L60 90" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="3,2"/><path d="M188 65 L240 40" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="3,2"/><path d="M188 70 L240 90" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="3,2"/><circle cx="55" cy="38" r="8" fill="rgba(245,158,11,.2)" stroke="#f59e0b"/><circle cx="55" cy="92" r="8" fill="rgba(245,158,11,.2)" stroke="#f59e0b"/><circle cx="245" cy="38" r="8" fill="rgba(245,158,11,.2)" stroke="#f59e0b"/><circle cx="245" cy="92" r="8" fill="rgba(245,158,11,.2)" stroke="#f59e0b"/>'},
+    {id:"timo",emoji:"⭐",name:"Timo",tagline:"La academia de linfocitos T",
+     desc:"Glándula ubicada entre el corazón y el esternón. Entrena a los linfocitos T para que reconozcan y ataquen gérmenes sin dañar las células propias. Es esencial en la infancia y se atrofia en la adultez.",
+     facts:[["⚔️","Entrena a los linfocitos T: el 95% que no aprenden bien son eliminados"],["📉","Se atrofia tras la pubertad — proceso llamado involución tímica"],["⚗️","Produce timosina y timulina, hormonas que maduran los linfocitos T"]],
+     svgCode:'<path d="M104 25 Q88 18,92 40 Q96 68,150 80 Q204 68,208 40 Q212 18,196 25 Q180 38,150 42 Q120 38,104 25Z" fill="rgba(245,158,11,.25)" stroke="#f59e0b" stroke-width="2.5"/><path d="M116 28 Q104 22,106 42 Q109 62,132 72 Q150 78,150 72 Q132 64,128 45 Q126 30,116 28Z" fill="rgba(245,158,11,.35)" stroke="#fbbf24" stroke-width="1.5"/><path d="M184 28 Q196 22,194 42 Q191 62,168 72 Q150 78,150 72 Q168 64,172 45 Q174 30,184 28Z" fill="rgba(245,158,11,.35)" stroke="#fbbf24" stroke-width="1.5"/><text x="150" y="58" text-anchor="middle" fill="#fde68a" font-size="11" font-weight="bold">TIMO</text><circle cx="80" cy="60" r="5" fill="rgba(245,158,11,.8)"><animate attributeName="cx" values="100;60;30" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;0" dur="2.5s" repeatCount="indefinite"/></circle><circle cx="220" cy="60" r="5" fill="rgba(245,158,11,.8)"><animate attributeName="cx" values="200;240;270" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.5;0" dur="3s" repeatCount="indefinite"/></circle><text x="150" y="115" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="9">Linfocitos T entrenados →</text>'},
+    {id:"tiroides",emoji:"🦋",name:"Tiroides",tagline:"El regulador del metabolismo",
+     desc:"Glándula con forma de mariposa ubicada en el cuello. Produce tiroxina (T4) y triyodotironina (T3) que regulan la velocidad del metabolismo, temperatura corporal, frecuencia cardíaca y desarrollo cerebral.",
+     facts:[["🦋","Tiene forma de mariposa con dos lóbulos unidos por el istmo"],["⚡","Sus hormonas T3 y T4 regulan la velocidad de TODOS los procesos celulares"],["🧠","El hipotiroidismo en el embarazo puede afectar el desarrollo cerebral del bebé"]],
+     svgCode:'<path d="M110 65 Q98 52,102 44 Q110 34,120 40 Q130 46,138 56 Q143 62,150 64 Q157 62,162 56 Q170 46,180 40 Q190 34,198 44 Q202 52,190 65 Q178 76,150 73 Q122 76,110 65Z" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2.5"/><text x="150" y="60" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="bold">Tiroides</text><text x="150" y="73" text-anchor="middle" fill="rgba(253,230,138,.6)" font-size="8">T3 + T4</text><path d="M150 73 L150 110" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,2"/><text x="150" y="125" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="9">Metabolismo</text>'},
+    {id:"suprarrenales",emoji:"⚡",name:"Glándulas Suprarrenales",tagline:"El motor de emergencia",
+     desc:"Dos glándulas pequeñas ubicadas encima de cada riñón. La corteza produce cortisol y aldosterona; la médula produce adrenalina y noradrenalina. Activan la respuesta de lucha o huida en segundos.",
+     facts:[["⚡","Liberan adrenalina en 0.2 segundos ante una amenaza"],["😰","El cortisol crónico elevado daña el hipocampo (memoria) y el sistema inmune"],["💪","La aldosterona regula la presión arterial controlando el sodio y el agua"]],
+     svgCode:'<path d="M80 45 Q62 38,64 54 Q66 70,80 78 Q92 84,96 72 Q100 60,92 50Z" fill="rgba(245,158,11,.22)" stroke="#f59e0b" stroke-width="2"/><ellipse cx="80" cy="88" rx="20" ry="28" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/><text x="80" y="115" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Riñón Izq.</text><path d="M220 45 Q238 38,236 54 Q234 70,220 78 Q208 84,204 72 Q200 60,208 50Z" fill="rgba(245,158,11,.22)" stroke="#f59e0b" stroke-width="2"/><ellipse cx="220" cy="88" rx="20" ry="28" fill="rgba(245,158,11,.08)" stroke="rgba(245,158,11,.3)" stroke-width="1.5"/><text x="220" y="115" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Riñón Der.</text><text x="80" y="60" text-anchor="middle" fill="#fde68a" font-size="7">Suprarenal</text><text x="220" y="60" text-anchor="middle" fill="#fde68a" font-size="7">Suprarenal</text>'},
+    {id:"pancreas",emoji:"🍬",name:"Páncreas Endocrino",tagline:"El árbitro del azúcar",
+     desc:"El páncreas tiene función mixta: exocrina (digestión) y endocrina. Sus islotes de Langerhans producen insulina (baja el azúcar) y glucagón (lo sube), manteniendo la glucemia en equilibrio constante.",
+     facts:[["⚖️","Mantiene la glucemia entre 70-100 mg/dL con precisión milimétrica"],["🩸","La diabetes tipo 1 ocurre cuando el sistema inmune destruye las células beta"],["🧪","Los islotes de Langerhans representan solo el 2% del tejido pancreático"]],
+     svgCode:'<path d="M40 65 Q80 50,150 58 Q200 62,240 55 Q260 52,265 65 Q260 78,240 75 Q200 82,150 72 Q80 80,40 65Z" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2"/><circle cx="100" cy="64" r="6" fill="rgba(245,158,11,.5)" stroke="#fbbf24" stroke-width="1"><animate attributeName="r" values="5;8;5" dur="2s" repeatCount="indefinite"/></circle><circle cx="160" cy="62" r="5" fill="rgba(245,158,11,.4)" stroke="#fbbf24" stroke-width="1"><animate attributeName="r" values="4;7;4" dur="2.5s" repeatCount="indefinite"/></circle><circle cx="210" cy="63" r="5" fill="rgba(245,158,11,.4)" stroke="#fbbf24" stroke-width="1"><animate attributeName="r" values="4;6;4" dur="1.8s" repeatCount="indefinite"/></circle><text x="150" y="100" text-anchor="middle" fill="#fde68a" font-size="10">Insulina ↔ Glucagón</text><text x="100" y="50" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">Islote β</text>'},
+    {id:"pineal",emoji:"🌙",name:"Glándula Pineal",tagline:"El reloj biológico",
+     desc:"Pequeña glándula del tamaño de un grano de arroz ubicada en el centro del cerebro. Produce melatonina en respuesta a la oscuridad, regulando el ciclo sueño-vigilia y el ritmo circadiano de 24 horas.",
+     facts:[["🌙","Produce melatonina solo cuando hay oscuridad — la luz la inhibe"],["⏰","Regula el ritmo circadiano de 24h que controla el sueño, metabolismo y más"],["📱","La luz azul de pantallas inhibe la melatonina y dificulta el sueño"]],
+     svgCode:'<ellipse cx="150" cy="65" rx="22" ry="18" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2"><animate attributeName="rx" values="20;26;20" dur="3s" repeatCount="indefinite"/></ellipse><text x="150" y="69" text-anchor="middle" fill="#fde68a" font-size="9" font-weight="bold">Pineal</text><path d="M150 83 L150 110" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="3,2"/><text x="150" y="122" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="9">Melatonina</text><circle cx="60" cy="65" r="20" fill="none" stroke="rgba(245,158,11,.2)" stroke-width="1"/><text x="60" y="69" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">🌙 Noche</text><circle cx="240" cy="65" r="20" fill="rgba(253,230,138,.05)" stroke="rgba(253,230,138,.2)" stroke-width="1"/><text x="240" y="69" text-anchor="middle" fill="rgba(253,230,138,.4)" font-size="8">☀️ Día</text><line x1="80" y1="65" x2="128" y2="65" stroke="rgba(245,158,11,.3)" stroke-width="1.5" stroke-dasharray="3,3"/><line x1="172" y1="65" x2="220" y2="65" stroke="rgba(245,158,11,.2)" stroke-width="1.5" stroke-dasharray="3,3"/>'}
+  ],
+  quiz:[
+    {q:"¿Dónde está ubicado el timo?",opts:["En el abdomen","Entre el corazón y el esternón","En el cuello","En el cerebro"],ans:1,exp:"¡Correcto! El timo está en el mediastino anterior, entre el esternón y el corazón."},
+    {q:"¿Qué células entrena el timo?",opts:["Linfocitos B","Glóbulos rojos","Linfocitos T","Plaquetas"],ans:2,exp:"¡Exacto! El timo entrena a los linfocitos T para que ataquen gérmenes sin atacar el propio cuerpo."},
+    {q:"¿Qué le pasa al timo después de la pubertad?",opts:["Crece más","Se mantiene igual","Se atrofia gradualmente","Desaparece de golpe"],ans:2,exp:"El timo sufre involución tímica — se encoge y es reemplazado por tejido graso tras la pubertad."},
+    {q:"¿Qué glándula produce melatonina?",opts:["Hipófisis","Tiroides","Suprarrenal","Pineal"],ans:3,exp:"¡Correcto! La glándula pineal produce melatonina en respuesta a la oscuridad, regulando el sueño."},
+    {q:"¿Qué porcentaje de linfocitos T son eliminados durante su entrenamiento en el timo?",opts:["10%","50%","75%","95%"],ans:3,exp:"¡Increíble! El 95% de los linfocitos T son destruidos en el timo — solo sobreviven los que aprenden correctamente."}
+  ],
+  facts:[
+    {em:"⭐",txt:"El timo alcanza su máximo peso (~40g) en la pubertad y después se encoge hasta casi desaparecer"},
+    {em:"⚔️",txt:"El 95% de los linfocitos T que entran al timo son eliminados — solo aprueban los mejores"},
+    {em:"🧬",txt:"Sin timo funcional, el sistema inmune no distingue lo propio de lo extraño — resultado: autoinmunidad"},
+    {em:"🌙",txt:"La luz azul de tu teléfono le dice al cerebro que es mediodía, bloqueando la melatonina"},
+    {em:"⚡",txt:"La adrenalina de las suprarrenales llega a todos los órganos en apenas 0.2 segundos"},
+    {em:"🦋",txt:"Una tiroides hiperactiva puede hacer que tu corazón lata 150 veces por minuto"},
+    {em:"🍬",txt:"Tu páncreas ajusta la insulina cada minuto según la glucosa de tu sangre — sin que lo notes"},
+    {em:"🧠",txt:"La hipófisis pesa 0.5g pero dirige un sistema que regula cada célula de tu cuerpo"}
+  ]
+};
+
+function renderComponents(){
+  document.getElementById('comp-grid').innerHTML = SYS.components.map(function(c,i){
+    return '<div class="comp-card" onclick="openModal('+i+')" tabindex="0" role="button">'+
+      '<div class="comp-emoji">'+c.emoji+'</div>'+
+      '<div class="comp-name">'+c.name+'</div>'+
+      '<div class="comp-tag">'+c.tagline+'</div>'+
+      '<span class="comp-arrow">→</span></div>';
+  }).join('');
+}
+
+function openModal(i){
+  var c = SYS.components[i];
+  document.getElementById('modal-emoji').textContent = c.emoji;
+  document.getElementById('modal-name').textContent = c.name;
+  document.getElementById('modal-tagline').textContent = c.tagline;
+  document.getElementById('modal-svg').innerHTML = c.svgCode;
+  document.getElementById('modal-desc').textContent = c.desc;
+  document.getElementById('modal-facts').innerHTML = c.facts.map(function(f){
+    return '<div class="modal-fact"><span class="modal-fact-icon">'+f[0]+'</span><span>'+f[1]+'</span></div>';
+  }).join('');
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('open') }
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-overlay').addEventListener('click', function(e){
+  if(e.target === document.getElementById('modal-overlay')) closeModal();
+});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+var qIdx=0, score=0;
+function renderQuiz(){
+  document.getElementById('quiz-progress').innerHTML = SYS.quiz.map(function(_,i){
+    return '<div class="quiz-dot '+(i<qIdx?'done':i===qIdx?'active':'')+'"></div>';
+  }).join('');
+  if(qIdx >= SYS.quiz.length){
+    document.getElementById('quiz-body').innerHTML =
+      '<div class="quiz-score"><div class="quiz-score-num">'+score+'/'+SYS.quiz.length+'</div>'+
+      '<div class="quiz-score-lbl">'+(score>=4?'🎉 ¡Excelente!':score>=2?'👏 ¡Bien hecho!':'💪 ¡Sigue intentando!')+'</div>'+
+      '<button class="quiz-retry" onclick="qIdx=0;score=0;renderQuiz()">🔄 Intentar de nuevo</button></div>';
+    return;
+  }
+  var q = SYS.quiz[qIdx];
+  document.getElementById('quiz-body').innerHTML =
+    '<div class="quiz-q">'+q.q+'</div>'+
+    '<div class="quiz-opts">'+q.opts.map(function(o,i){ return '<button class="quiz-opt" onclick="answerQ('+i+')">'+o+'</button>'; }).join('')+'</div>'+
+    '<div class="quiz-feedback" id="qfb"></div>'+
+    '<div><button class="quiz-next" id="qnext" onclick="qIdx++;renderQuiz()" style="display:none">Siguiente →</button></div>';
+}
+function answerQ(i){
+  var q = SYS.quiz[qIdx];
+  var opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach(function(o){ o.disabled = true; });
+  if(i===q.ans){ score++; opts[i].classList.add('correct'); document.getElementById('qfb').className='quiz-feedback ok'; document.getElementById('qfb').textContent='✅ '+q.exp; }
+  else { opts[i].classList.add('wrong'); opts[q.ans].classList.add('correct'); document.getElementById('qfb').className='quiz-feedback fail'; document.getElementById('qfb').textContent='❌ '+q.exp; }
+  document.getElementById('qnext').style.display='inline-flex';
+}
+
+function renderFacts(){
+  document.getElementById('facts-track').innerHTML = SYS.facts.map(function(f){
+    return '<div class="fact-card"><div class="fact-em">'+f.em+'</div><p class="fact-txt">'+f.txt+'</p></div>';
+  }).join('');
+}
+
+renderComponents(); renderQuiz(); renderFacts();
+
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.05, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.appear').forEach(function(el){ io.observe(el); });
+
+var ham=document.getElementById('ham'), menu=document.getElementById('nav-menu');
+ham.addEventListener('click', function(){ menu.classList.toggle('open'); });
+</script>
+</body>
+</html>

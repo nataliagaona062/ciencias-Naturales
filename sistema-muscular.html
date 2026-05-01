@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnatomíaViva — Sistema Muscular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c1:#991b1b;--c2:#92400e;--cg:linear-gradient(135deg,#dc2626,#b45309);--cb:rgba(153,27,27,.12);--cs:rgba(220,38,38,.28);--ct:#fca5a5;--bg:#07071a;--glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);--tx:#f0f0ff;--tx2:rgba(240,240,255,.6)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:58px;background:rgba(7,7,26,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--gb)}
+.nav-brand{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-sys{font-size:.85rem;font-weight:600;color:var(--ct);background:var(--cb);border:1px solid var(--cs);padding:5px 14px;border-radius:100px}
+.nav-menu{display:flex;list-style:none;gap:20px;align-items:center}.nav-menu a{color:var(--tx2);text-decoration:none;font-size:.86rem;font-weight:500;transition:color .2s}.nav-menu a:hover{color:var(--tx)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-ham span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 40px}
+.hero-svg-wrap{width:min(280px,70vw);height:min(290px,65vw);margin-bottom:28px}
+.hero-svg-wrap svg{width:100%;height:100%}
+.hero-stat{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.6rem,7.5vw,5rem);background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px;animation:fadeU .8s ease both}
+.hero-stat-lbl{font-size:.9rem;color:var(--tx2);margin-bottom:18px;animation:fadeU .8s ease .1s both}
+.hero-title{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.12;margin-bottom:10px;animation:fadeU .8s ease .2s both}
+.hero-accent{background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:1rem;max-width:400px;margin-bottom:30px;animation:fadeU .8s ease .3s both}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;background:var(--cg);color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;padding:13px 30px;border-radius:100px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 0 36px rgba(220,38,38,.4);transition:transform .25s;animation:fadeU .8s ease .4s both}
+.hero-btn:hover{transform:translateY(-3px) scale(1.03)}
+.section{padding:64px 24px;max-width:1100px;margin:0 auto}
+.sec-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(1.5rem,3.2vw,2.1rem);margin-bottom:10px;text-align:center}
+.sec-sub{color:var(--tx2);text-align:center;margin-bottom:36px;font-size:.93rem}
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.comp-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:22px;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative}
+.comp-card:hover{transform:translateY(-5px);border-color:var(--cs);box-shadow:0 12px 40px rgba(220,38,38,.18)}
+.comp-emoji{font-size:2.4rem;margin-bottom:10px}.comp-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:.98rem;margin-bottom:4px;color:var(--ct)}.comp-tag{font-size:.76rem;color:var(--tx2)}
+.comp-arrow{position:absolute;bottom:14px;right:14px;font-size:1.1rem;color:var(--ct);transition:transform .2s}.comp-card:hover .comp-arrow{transform:translateX(4px)}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#0f0f2a;border:1px solid var(--cs);border-radius:24px;max-width:500px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;position:relative;transform:translateY(20px) scale(.97);transition:transform .3s;scrollbar-width:thin;scrollbar-color:var(--cs) transparent}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.07);border:none;color:var(--tx);font-size:1.1rem;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(255,255,255,.14)}
+.modal-emoji{font-size:3rem;margin-bottom:8px}.modal-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.45rem;margin-bottom:5px;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-tagline{color:var(--tx2);font-size:.87rem;margin-bottom:12px}
+.modal-svg{width:100%;max-height:140px;margin-bottom:16px;border-radius:12px;background:var(--cb);padding:10px}
+.modal-desc{font-size:.92rem;line-height:1.65;margin-bottom:16px}
+.modal-facts{display:flex;flex-direction:column;gap:9px}
+.modal-fact{display:flex;align-items:flex-start;gap:10px;background:var(--cb);border:1px solid var(--cs);border-radius:12px;padding:10px 13px;font-size:.85rem;color:var(--tx2)}
+.modal-fact-icon{font-size:1.1rem;flex-shrink:0}
+.quiz-wrap{background:var(--glass);border:1px solid var(--gb);border-radius:24px;padding:30px;max-width:620px;margin:0 auto}
+.quiz-progress{display:flex;gap:6px;margin-bottom:20px}
+.quiz-dot{flex:1;height:4px;border-radius:2px;background:var(--gb)}.quiz-dot.done{background:var(--cg)}.quiz-dot.active{background:var(--c1)}
+.quiz-q{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.04rem;margin-bottom:16px;line-height:1.5}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.quiz-opt{background:var(--glass);border:1px solid var(--gb);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:.87rem;text-align:left;color:var(--tx);transition:all .2s}
+.quiz-opt:hover:not(:disabled){border-color:var(--c1);background:var(--cb);transform:translateY(-2px)}
+.quiz-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15);color:#6ee7b7}
+.quiz-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.12);color:#fca5a5}
+.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.87rem;padding:10px 13px;border-radius:12px;margin-bottom:12px;line-height:1.5}
+.quiz-feedback.ok{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.quiz-feedback.fail{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+.quiz-next{display:inline-flex;align-items:center;gap:8px;background:var(--cg);color:#fff;border:none;padding:10px 22px;border-radius:100px;font-size:.87rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif}
+.quiz-score{text-align:center}.quiz-score-num{font-family:'Poppins',sans-serif;font-weight:900;font-size:3.8rem;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.quiz-score-lbl{color:var(--tx2);margin-bottom:16px;font-size:.9rem}
+.quiz-retry{background:var(--cb);border:1px solid var(--cs);color:var(--ct);padding:10px 22px;border-radius:100px;font-size:.87rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif}
+.facts-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:none;cursor:grab}.facts-track:active{cursor:grabbing}.facts-track::-webkit-scrollbar{display:none}
+.fact-card{flex:0 0 176px;background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:18px 14px;scroll-snap-align:start;transition:transform .2s,border-color .2s}
+.fact-card:hover{transform:translateY(-4px);border-color:var(--cs)}
+.fact-em{font-size:2rem;margin-bottom:8px}.fact-txt{font-size:.81rem;color:var(--tx2);line-height:1.5}
+.sys-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:36px 24px;max-width:1100px;margin:0 auto;border-top:1px solid var(--gb)}
+.sys-nav-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:.88rem;padding:10px 20px;border-radius:100px;border:1px solid var(--gb);color:var(--tx2);background:var(--glass);transition:all .25s}
+.sys-nav-btn:hover{border-color:var(--cs);color:var(--ct);background:var(--cb)}
+.sys-nav-home{color:var(--ct);border-color:var(--cs);background:var(--cb)}
+.footer{border-top:1px solid var(--gb);padding:22px;text-align:center;font-size:.8rem;color:var(--tx2)}
+@keyframes fadeU{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes muscleHero{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.92) scaleX(1.06)}}
+.appear{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}.appear.in{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.quiz-opts{grid-template-columns:1fr}.nav-menu{display:none}.nav-ham{display:flex}.nav-menu.open{display:flex;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:rgba(7,7,26,.98);padding:12px 24px 20px;gap:12px;border-bottom:1px solid var(--gb)}}
+@media(max-width:480px){.comp-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-brand" href="index.html">🧬 AnatomíaViva</a>
+  <ul class="nav-menu" id="nav-menu">
+    <li><span class="nav-sys">💪 Muscular</span></li>
+    <li><a href="#componentes">Componentes</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="index.html">Inicio</a></li>
+  </ul>
+  <button class="nav-ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<section class="hero">
+  <div class="hero-svg-wrap" style="animation:fadeU .9s ease both">
+    <svg viewBox="0 0 240 280" fill="none">
+      <g style="animation:muscleHero 2.5s ease-in-out infinite;transform-origin:120px 140px">
+        <path d="M70 240 Q58 200,62 165 Q68 130,80 112 Q94 90,108 82 Q115 78,120 76 Q125 78,132 82 Q146 90,160 112 Q172 130,178 165 Q182 200,170 240 Z" fill="rgba(153,27,27,.22)" stroke="#991b1b" stroke-width="2.5"/>
+        <path d="M82 150 Q96 130,120 125 Q144 130,158 150" fill="rgba(220,38,38,.2)" stroke="#dc2626" stroke-width="2"/>
+        <path d="M78 172 Q100 152,120 148 Q140 152,162 172" fill="rgba(185,28,28,.15)" stroke="#b91c1c" stroke-width="1.5"/>
+        <path d="M80 130 Q96 118,120 115 Q144 118,160 130" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <path d="M76 160 Q98 144,120 140 Q142 144,164 160" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <path d="M78 192 Q100 174,120 170 Q140 174,162 192" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,2"/>
+      </g>
+      <path d="M120 76 L120 42" stroke="#991b1b" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="120" cy="32" r="18" fill="rgba(153,27,27,.2)" stroke="#991b1b" stroke-width="2"/>
+      <text x="120" y="38" text-anchor="middle" fill="#fca5a5" font-size="16">💪</text>
+      <path d="M70 165 L40 145 L30 180" stroke="#b91c1c" stroke-width="3" stroke-linecap="round"/>
+      <path d="M170 165 L200 145 L210 180" stroke="#b91c1c" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="hero-stat">640+</div>
+  <div class="hero-stat-lbl">músculos en tu cuerpo listos para moverse</div>
+  <h1 class="hero-title">600+ músculos.<br><span class="hero-accent">Fuerza en cada movimiento.</span></h1>
+  <p class="hero-sub">Tus músculos son el 40% de tu peso. Algunos se usan incluso cuando duermes.</p>
+  <a href="#componentes" class="hero-btn">💪 Descubrir componentes</a>
+</section>
+<section class="section appear" id="componentes">
+  <h2 class="sec-title">Componentes del sistema</h2>
+  <p class="sec-sub">Haz clic en cada componente para explorar en detalle</p>
+  <div class="comp-grid" id="comp-grid"></div>
+</section>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal"><button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-emoji" class="modal-emoji"></div><div id="modal-name" class="modal-name"></div>
+    <div id="modal-tagline" class="modal-tagline"></div><svg id="modal-svg" class="modal-svg" viewBox="0 0 300 130"></svg>
+    <div id="modal-desc" class="modal-desc"></div><div id="modal-facts" class="modal-facts"></div>
+  </div>
+</div>
+<section class="section appear" id="quiz">
+  <h2 class="sec-title">🧩 Mini Quiz</h2>
+  <p class="sec-sub">5 preguntas sobre tus músculos</p>
+  <div class="quiz-wrap"><div class="quiz-progress" id="quiz-progress"></div><div id="quiz-body"></div></div>
+</section>
+<section class="section appear" id="datos">
+  <h2 class="sec-title">🤯 Datos que te sorprenderán</h2>
+  <div class="facts-track" id="facts-track"></div>
+</section>
+<nav class="sys-nav">
+  <a href="sistema-oseo.html" class="sys-nav-btn">← Óseo 💀</a>
+  <a href="index.html" class="sys-nav-btn sys-nav-home">🏠 Inicio</a>
+  <a href="sistema-nervioso.html" class="sys-nav-btn">Nervioso 🧠 →</a>
+</nav>
+<footer class="footer">🧬 AnatomíaViva — Plataforma educativa interactiva</footer>
+<script>
+const SYS = {
+  components: [
+    {id:"biceps",emoji:"💪",name:"Bíceps",tagline:"El músculo del brazo",
+     desc:"Músculo de dos cabezas en la parte anterior del brazo. Flexiona el codo y rota el antebrazo. Su opuesto, el tríceps, tiene 3 cabezas.",
+     facts:[["🔢","El bíceps tiene 2 cabezas musculares"],["⚖️","El tríceps es en realidad 60% más grande"],["🔄","Trabaja en par opuesto con el tríceps"]],
+     svgCode:`<path d="M105 115 Q88 85,95 60 Q103 38,120 32 Q137 38,145 60 Q152 85,135 115 Z" fill="rgba(153,27,27,.22)" stroke="#991b1b" stroke-width="2.5"/><path d="M108 80 Q118 64,120 60 Q122 64,132 80" fill="rgba(220,38,38,.2)" stroke="#dc2626" stroke-width="2"/><path d="M107 68 Q118 56,133 68" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/><path d="M105 86 Q118 74,135 86" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/><text x="165" y="70" fill="rgba(240,240,255,.5)" font-size="10">Cabeza</text><text x="165" y="83" fill="rgba(240,240,255,.5)" font-size="10">corta</text>` },
+    {id:"triceps",emoji:"🦾",name:"Tríceps",tagline:"El más grande del brazo",
+     desc:"Músculo de tres cabezas en la parte posterior del brazo. Es el más voluminoso del brazo (60% más grande que el bíceps) y extiende el codo.",
+     facts:[["🔢","Tiene 3 cabezas: larga, media y lateral"],["📊","Es el 60-70% del volumen total del brazo"],["💪","Se activa al empujar y extender"]],
+     svgCode:`<path d="M95 20 Q82 50,88 80 Q95 105,120 115 Q145 105,152 80 Q158 50,145 20 Z" fill="rgba(153,27,27,.18)" stroke="#991b1b" stroke-width="2"/><path d="M100 30 Q90 60,95 85 Q105 105,120 112" fill="none" stroke="#dc2626" stroke-width="2"/><path d="M140 30 Q150 60,145 85 Q135 105,120 112" fill="none" stroke="#dc2626" stroke-width="2"/><path d="M104 55 Q120 48,136 55" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/><path d="M101 72 Q120 65,139 72" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/>` },
+    {id:"cuadriceps",emoji:"🦵",name:"Cuádriceps",tagline:"Los 4 del muslo",
+     desc:"4 músculos del muslo anterior que extienden la rodilla. Son los más grandes y potentes del cuerpo. Esenciales para correr, saltar y subir escaleras.",
+     facts:[["🔢","Cuatro cabezas forman este grupo muscular"],["🏆","Son los músculos más grandes del cuerpo"],["⚡","Se activan con cada paso que das"]],
+     svgCode:`<rect x="88" y="10" width="44" height="110" rx="18" fill="rgba(153,27,27,.2)" stroke="#991b1b" stroke-width="2.5"/><line x1="110" y1="10" x2="110" y2="120" stroke="#991b1b" stroke-width="1.5" stroke-dasharray="4,3" opacity=".5"/><path d="M92 30 Q110 24,128 30" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/><path d="M90 50 Q110 42,130 50" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/><path d="M90 70 Q110 62,130 70" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/><path d="M90 90 Q110 82,130 90" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2"/><text x="150" y="65" fill="rgba(240,240,255,.5)" font-size="9">×4</text><text x="150" y="78" fill="rgba(240,240,255,.5)" font-size="9">cabezas</text>` },
+    {id:"gluteos",emoji:"🍑",name:"Glúteos",tagline:"El músculo más grande",
+     desc:"3 músculos glúteos forman la cadera. El glúteo mayor es el más grande del cuerpo humano y es único en primates que caminan erguidos.",
+     facts:[["🏆","El glúteo mayor es el músculo más grande del cuerpo"],["🧍","Nos permite mantenernos erguidos"],["🦍","Es único en primates bípedos como nosotros"]],
+     svgCode:`<path d="M60 40 Q60 15,120 12 Q180 15,180 40 Q185 75,165 100 Q145 120,120 118 Q95 120,75 100 Q55 75,60 40Z" fill="rgba(153,27,27,.2)" stroke="#991b1b" stroke-width="2.5"/><path d="M75 50 Q100 38,120 36 Q140 38,165 50" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,2"/><path d="M68 70 Q95 56,120 54 Q145 56,172 70" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,2"/><path d="M70 88 Q96 74,120 72 Q144 74,170 88" fill="none" stroke="#92400e" stroke-width="1.5" stroke-dasharray="4,2"/>` },
+    {id:"abdominales",emoji:"🎯",name:"Abdominales",tagline:"El núcleo del cuerpo",
+     desc:"Grupo de músculos que rodean el torso. Estabilizan la columna, protegen órganos internos y transfieren fuerza entre el tren superior e inferior.",
+     facts:[["6️⃣","El 'six-pack' es 1 músculo dividido en 6 partes"],["🛡️","Protegen órganos vitales como escudo"],["⚡","Se activan en casi todos los movimientos"]],
+     svgCode:`<rect x="108" y="10" width="44" height="110" rx="10" fill="rgba(153,27,27,.15)" stroke="#991b1b" stroke-width="2"/><line x1="130" y1="10" x2="130" y2="120" stroke="#991b1b" stroke-width="1.5" opacity=".5"/><line x1="108" y1="42" x2="152" y2="42" stroke="#dc2626" stroke-width="1.5"/><line x1="108" y1="74" x2="152" y2="74" stroke="#dc2626" stroke-width="1.5"/><rect x="110" y="12" width="18" height="28" rx="4" fill="rgba(220,38,38,.15)" stroke="#b91c1c" stroke-width="1"/><rect x="132" y="12" width="18" height="28" rx="4" fill="rgba(220,38,38,.15)" stroke="#b91c1c" stroke-width="1"/><rect x="110" y="44" width="18" height="28" rx="4" fill="rgba(220,38,38,.15)" stroke="#b91c1c" stroke-width="1"/><rect x="132" y="44" width="18" height="28" rx="4" fill="rgba(220,38,38,.15)" stroke="#b91c1c" stroke-width="1"/><rect x="110" y="76" width="18" height="28" rx="4" fill="rgba(220,38,38,.15)" stroke="#b91c1c" stroke-width="1"/><rect x="132" y="76" width="18" height="28" rx="4" fill="rgba(220,38,38,.15)" stroke="#b91c1c" stroke-width="1"/>` }
+  ],
+  quiz: [
+    {q:"¿Cuántos músculos hay en el cuerpo humano?",opts:["200","400","640","1000"],ans:2,exp:"¡El cuerpo humano tiene aproximadamente 640 músculos!"},
+    {q:"¿Qué porcentaje del peso corporal son los músculos?",opts:["10%","20%","30%","40%"],ans:3,exp:"¡Los músculos representan aproximadamente el 40% del peso corporal!"},
+    {q:"¿Cuál es el músculo más grande del cuerpo?",opts:["Cuádriceps","Glúteo mayor","Dorsal ancho","Bíceps femoral"],ans:1,exp:"¡El glúteo mayor es el músculo más grande del cuerpo humano!"},
+    {q:"¿Cada cuántos días se regeneran los músculos?",opts:["30 días","100 días","300 días","1000 días"],ans:2,exp:"Las células musculares se renuevan completamente en aproximadamente 300 días."},
+    {q:"¿Qué necesitan los músculos para contraerse?",opts:["Agua","ATP (energía)","Calcio iónico","Oxígeno puro"],ans:1,exp:"¡Los músculos necesitan ATP (adenosín trifosfato) como fuente de energía para contraerse!"}
+  ],
+  facts: [
+    {em:"💪",txt:"Tienes 640 músculos — representan el 40% de tu peso total"},
+    {em:"🌡️",txt:"Los músculos generan el 85% del calor corporal al contraerse"},
+    {em:"👁️",txt:"Los músculos oculares son los más activos — se mueven 100,000 veces al día"},
+    {em:"😊",txt:"Sonreír usa 17 músculos — fruncir el ceño usa 43"},
+    {em:"🔄",txt:"Los músculos se renuevan completamente en aproximadamente 300 días"},
+    {em:"⚡",txt:"Una contracción muscular dura entre 0.01 y 0.1 segundos"},
+    {em:"🏋️",txt:"El corazón es un músculo que nunca descansa — late 100,000 veces al día"},
+    {em:"🧬",txt:"El músculo más pequeño está en el oído: el músculo del estribo con 1.27mm"}
+  ]
+};
+function renderComponents(){document.getElementById('comp-grid').innerHTML=SYS.components.map((c,i)=>`<div class="comp-card" onclick="openModal(${i})" tabindex="0" role="button" onkeydown="if(event.key==='Enter')openModal(${i})"><div class="comp-emoji">${c.emoji}</div><div class="comp-name">${c.name}</div><div class="comp-tag">${c.tagline}</div><span class="comp-arrow">→</span></div>`).join('')}
+function openModal(i){const c=SYS.components[i];document.getElementById('modal-emoji').textContent=c.emoji;document.getElementById('modal-name').textContent=c.name;document.getElementById('modal-tagline').textContent=c.tagline;document.getElementById('modal-svg').innerHTML=c.svgCode;document.getElementById('modal-desc').textContent=c.desc;document.getElementById('modal-facts').innerHTML=c.facts.map(f=>`<div class="modal-fact"><span class="modal-fact-icon">${f[0]}</span><span>${f[1]}</span></div>`).join('');document.getElementById('modal-overlay').classList.add('open')}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open')}
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('modal-overlay'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+let qIdx=0,score=0,answered=false;
+function renderQuiz(){document.getElementById('quiz-progress').innerHTML=SYS.quiz.map((_,i)=>`<div class="quiz-dot ${i<qIdx?'done':i===qIdx?'active':''}"></div>`).join('');if(qIdx>=SYS.quiz.length){document.getElementById('quiz-body').innerHTML=`<div class="quiz-score"><div class="quiz-score-num">${score}/${SYS.quiz.length}</div><div class="quiz-score-lbl">${score>=4?'🎉 ¡Excelente!':score>=2?'👏 ¡Bien hecho!':'💪 ¡Sigue practicando!'}</div><button class="quiz-retry" onclick="qIdx=0;score=0;answered=false;renderQuiz()">🔄 Intentar de nuevo</button></div>`;return;}const q=SYS.quiz[qIdx];document.getElementById('quiz-body').innerHTML=`<div class="quiz-q">Pregunta ${qIdx+1}: ${q.q}</div><div class="quiz-opts">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQ(${i})">${o}</button>`).join('')}</div><div class="quiz-feedback" id="quiz-fb" style="display:none"></div><button class="quiz-next" id="quiz-next" onclick="qIdx++;answered=false;renderQuiz()" style="display:none">Siguiente →</button>`}
+function answerQ(i){if(answered)return;answered=true;const q=SYS.quiz[qIdx],correct=i===q.ans;if(correct)score++;document.querySelectorAll('.quiz-opt').forEach((el,idx)=>{el.disabled=true;if(idx===q.ans)el.classList.add('correct');else if(idx===i&&!correct)el.classList.add('wrong')});const fb=document.getElementById('quiz-fb');fb.style.display='block';fb.className='quiz-feedback '+(correct?'ok':'fail');fb.textContent=correct?'✅ '+q.exp:'❌ Correcto: '+q.opts[q.ans]+'. '+q.exp;document.getElementById('quiz-next').style.display='inline-flex'}
+renderComponents();renderQuiz();
+document.getElementById('facts-track').innerHTML=SYS.facts.map(f=>`<div class="fact-card"><div class="fact-em">${f.em}</div><p class="fact-txt">${f.txt}</p></div>`).join('');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.appear').forEach(el=>io.observe(el));
+const ham=document.getElementById('ham'),menu=document.getElementById('nav-menu');
+ham.addEventListener('click',()=>menu.classList.toggle('open'));
+document.addEventListener('click',e=>{if(!ham.contains(e.target)&&!menu.contains(e.target))menu.classList.remove('open')});
+</script>
+</body>
+</html>

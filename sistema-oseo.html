@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnatomíaViva — Sistema Óseo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--c1:#9ca3af;--c2:#f3f4f6;--cg:linear-gradient(135deg,#9ca3af,#f3f4f6);--cb:rgba(156,163,175,.1);--cs:rgba(156,163,175,.28);--ct:#e5e7eb;--bg:#07071a;--glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);--tx:#f0f0ff;--tx2:rgba(240,240,255,.6)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:58px;background:rgba(7,7,26,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--gb)}
+.nav-brand{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-sys{font-size:.85rem;font-weight:600;color:var(--ct);background:var(--cb);border:1px solid var(--cs);padding:5px 14px;border-radius:100px}
+.nav-menu{display:flex;list-style:none;gap:20px;align-items:center}.nav-menu a{color:var(--tx2);text-decoration:none;font-size:.86rem;font-weight:500;transition:color .2s}.nav-menu a:hover{color:var(--tx)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}.nav-ham span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 40px}
+.hero-svg-wrap{width:min(260px,65vw);height:min(300px,65vw);margin-bottom:24px}
+.hero-svg-wrap svg{width:100%;height:100%}
+.hero-stat{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.6rem,7.5vw,5rem);background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px;animation:fadeU .8s ease both}
+.hero-stat-lbl{font-size:.9rem;color:var(--tx2);margin-bottom:18px;animation:fadeU .8s ease .1s both}
+.hero-title{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.12;margin-bottom:10px;animation:fadeU .8s ease .2s both}
+.hero-accent{background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:1rem;max-width:400px;margin-bottom:30px;animation:fadeU .8s ease .3s both}
+.hero-btn{display:inline-flex;align-items:center;gap:10px;background:var(--cg);color:#111;font-family:'Poppins',sans-serif;font-weight:700;font-size:.95rem;padding:13px 30px;border-radius:100px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 0 36px rgba(156,163,175,.4);transition:transform .25s;animation:fadeU .8s ease .4s both}
+.hero-btn:hover{transform:translateY(-3px) scale(1.03)}
+.section{padding:64px 24px;max-width:1100px;margin:0 auto}
+.sec-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(1.5rem,3.2vw,2.1rem);margin-bottom:10px;text-align:center}
+.sec-sub{color:var(--tx2);text-align:center;margin-bottom:36px;font-size:.93rem}
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.comp-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:22px;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s;position:relative}
+.comp-card:hover{transform:translateY(-5px);border-color:var(--cs);box-shadow:0 12px 40px rgba(156,163,175,.15)}
+.comp-emoji{font-size:2.4rem;margin-bottom:10px}.comp-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:.98rem;margin-bottom:4px;color:var(--ct)}.comp-tag{font-size:.76rem;color:var(--tx2)}
+.comp-arrow{position:absolute;bottom:14px;right:14px;font-size:1.1rem;color:var(--ct);transition:transform .2s}.comp-card:hover .comp-arrow{transform:translateX(4px)}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#0f0f2a;border:1px solid var(--cs);border-radius:24px;max-width:500px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;position:relative;transform:translateY(20px) scale(.97);transition:transform .3s;scrollbar-width:thin;scrollbar-color:var(--cs) transparent}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.07);border:none;color:var(--tx);font-size:1.1rem;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:rgba(255,255,255,.14)}
+.modal-emoji{font-size:3rem;margin-bottom:8px}.modal-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.45rem;margin-bottom:5px;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-tagline{color:var(--tx2);font-size:.87rem;margin-bottom:12px}
+.modal-svg{width:100%;max-height:140px;margin-bottom:16px;border-radius:12px;background:var(--cb);padding:10px}
+.modal-desc{font-size:.92rem;line-height:1.65;margin-bottom:16px}
+.modal-facts{display:flex;flex-direction:column;gap:9px}
+.modal-fact{display:flex;align-items:flex-start;gap:10px;background:var(--cb);border:1px solid var(--cs);border-radius:12px;padding:10px 13px;font-size:.85rem;color:var(--tx2)}
+.modal-fact-icon{font-size:1.1rem;flex-shrink:0}
+.quiz-wrap{background:var(--glass);border:1px solid var(--gb);border-radius:24px;padding:30px;max-width:620px;margin:0 auto}
+.quiz-progress{display:flex;gap:6px;margin-bottom:20px}
+.quiz-dot{flex:1;height:4px;border-radius:2px;background:var(--gb)}.quiz-dot.done{background:var(--cg)}.quiz-dot.active{background:var(--c1)}
+.quiz-q{font-family:'Poppins',sans-serif;font-weight:600;font-size:1.04rem;margin-bottom:16px;line-height:1.5}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.quiz-opt{background:var(--glass);border:1px solid var(--gb);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:.87rem;text-align:left;color:var(--tx);transition:all .2s}
+.quiz-opt:hover:not(:disabled){border-color:var(--c1);background:var(--cb);transform:translateY(-2px)}
+.quiz-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15);color:#6ee7b7}
+.quiz-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.12);color:#fca5a5}
+.quiz-opt:disabled{cursor:default}
+.quiz-feedback{font-size:.87rem;padding:10px 13px;border-radius:12px;margin-bottom:12px;line-height:1.5}
+.quiz-feedback.ok{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.quiz-feedback.fail{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+.quiz-next{display:inline-flex;align-items:center;gap:8px;background:var(--cg);color:#111;border:none;padding:10px 22px;border-radius:100px;font-size:.87rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif}
+.quiz-score{text-align:center}.quiz-score-num{font-family:'Poppins',sans-serif;font-weight:900;font-size:3.8rem;background:var(--cg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.quiz-score-lbl{color:var(--tx2);margin-bottom:16px;font-size:.9rem}
+.quiz-retry{background:var(--cb);border:1px solid var(--cs);color:var(--ct);padding:10px 22px;border-radius:100px;font-size:.87rem;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif}
+.facts-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:none;cursor:grab}.facts-track:active{cursor:grabbing}.facts-track::-webkit-scrollbar{display:none}
+.fact-card{flex:0 0 176px;background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:18px 14px;scroll-snap-align:start;transition:transform .2s,border-color .2s}
+.fact-card:hover{transform:translateY(-4px);border-color:var(--cs)}
+.fact-em{font-size:2rem;margin-bottom:8px}.fact-txt{font-size:.81rem;color:var(--tx2);line-height:1.5}
+.sys-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:36px 24px;max-width:1100px;margin:0 auto;border-top:1px solid var(--gb)}
+.sys-nav-btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:.88rem;padding:10px 20px;border-radius:100px;border:1px solid var(--gb);color:var(--tx2);background:var(--glass);transition:all .25s}
+.sys-nav-btn:hover{border-color:var(--cs);color:var(--ct);background:var(--cb)}
+.sys-nav-home{color:var(--ct);border-color:var(--cs);background:var(--cb)}
+.footer{border-top:1px solid var(--gb);padding:22px;text-align:center;font-size:.8rem;color:var(--tx2)}
+@keyframes fadeU{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes boneGlow{0%,100%{filter:drop-shadow(0 0 2px rgba(243,244,246,.2))}50%{filter:drop-shadow(0 0 10px rgba(243,244,246,.6))}}
+.appear{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}.appear.in{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.quiz-opts{grid-template-columns:1fr}.nav-menu{display:none}.nav-ham{display:flex}.nav-menu.open{display:flex;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:rgba(7,7,26,.98);padding:12px 24px 20px;gap:12px;border-bottom:1px solid var(--gb)}}
+@media(max-width:480px){.comp-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-brand" href="index.html">🧬 AnatomíaViva</a>
+  <ul class="nav-menu" id="nav-menu">
+    <li><span class="nav-sys">💀 Óseo</span></li>
+    <li><a href="#componentes">Componentes</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="index.html">Inicio</a></li>
+  </ul>
+  <button class="nav-ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<section class="hero">
+  <div class="hero-svg-wrap" style="animation:fadeU .9s ease both">
+    <svg viewBox="0 0 220 310" fill="none" style="animation:boneGlow 3s ease-in-out infinite">
+      <circle cx="110" cy="30" r="25" fill="rgba(156,163,175,.18)" stroke="#d1d5db" stroke-width="2.5"/>
+      <rect x="96" y="56" width="28" height="14" rx="5" fill="rgba(107,114,128,.25)" stroke="#9ca3af" stroke-width="2"/>
+      <rect x="96" y="70" width="28" height="65" rx="8" fill="rgba(107,114,128,.2)" stroke="#9ca3af" stroke-width="2"/>
+      <path d="M96 78 L55 94 M96 98 L55 110" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+      <path d="M124 78 L165 94 M124 98 L165 110" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="48" cy="94" r="10" fill="rgba(107,114,128,.2)" stroke="#6b7280" stroke-width="2"/>
+      <circle cx="172" cy="94" r="10" fill="rgba(107,114,128,.2)" stroke="#6b7280" stroke-width="2"/>
+      <path d="M42 104 L30 140 L36 160" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+      <path d="M178 104 L190 140 L184 160" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+      <path d="M97 135 L68 150 M123 135 L152 150" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M97 135 L87 182 L90 230" stroke="#9ca3af" stroke-width="5" stroke-linecap="round"/>
+      <path d="M123 135 L133 182 L130 230" stroke="#9ca3af" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="90" cy="238" r="12" fill="rgba(107,114,128,.2)" stroke="#6b7280" stroke-width="2"/>
+      <circle cx="130" cy="238" r="12" fill="rgba(107,114,128,.2)" stroke="#6b7280" stroke-width="2"/>
+      <path d="M82 250 L78 295" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+      <path d="M98 250 L100 295" stroke="#6b7280" stroke-width="3" stroke-linecap="round"/>
+      <path d="M122 250 L120 295" stroke="#6b7280" stroke-width="3" stroke-linecap="round"/>
+      <path d="M138 250 L142 295" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="hero-stat">206</div>
+  <div class="hero-stat-lbl">huesos en el cuerpo humano adulto</div>
+  <h1 class="hero-title">206 huesos.<br><span class="hero-accent">Tu estructura de poder.</span></h1>
+  <p class="hero-sub">Naciste con 270 huesos. Muchos se fusionaron. Lo que queda es más fuerte que el acero.</p>
+  <a href="#componentes" class="hero-btn">🦴 Descubrir componentes</a>
+</section>
+<section class="section appear" id="componentes">
+  <h2 class="sec-title">Componentes del sistema</h2>
+  <p class="sec-sub">Haz clic en cada componente para explorar en detalle</p>
+  <div class="comp-grid" id="comp-grid"></div>
+</section>
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal"><button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-emoji" class="modal-emoji"></div><div id="modal-name" class="modal-name"></div>
+    <div id="modal-tagline" class="modal-tagline"></div><svg id="modal-svg" class="modal-svg" viewBox="0 0 300 130"></svg>
+    <div id="modal-desc" class="modal-desc"></div><div id="modal-facts" class="modal-facts"></div>
+  </div>
+</div>
+<section class="section appear" id="quiz">
+  <h2 class="sec-title">🧩 Mini Quiz</h2>
+  <p class="sec-sub">5 preguntas sobre tus huesos</p>
+  <div class="quiz-wrap"><div class="quiz-progress" id="quiz-progress"></div><div id="quiz-body"></div></div>
+</section>
+<section class="section appear" id="datos">
+  <h2 class="sec-title">🤯 Datos que te sorprenderán</h2>
+  <div class="facts-track" id="facts-track"></div>
+</section>
+<nav class="sys-nav">
+  <a href="sistema-digestivo.html" class="sys-nav-btn">← Digestivo 🫃</a>
+  <a href="index.html" class="sys-nav-btn sys-nav-home">🏠 Inicio</a>
+  <a href="sistema-muscular.html" class="sys-nav-btn">Muscular 💪 →</a>
+</nav>
+<footer class="footer">🧬 AnatomíaViva — Plataforma educativa interactiva</footer>
+<script>
+const SYS = {
+  components: [
+    {id:"craneo",emoji:"💀",name:"Cráneo",tagline:"La fortaleza del cerebro",
+     desc:"22 huesos fusionados que forman la caja más resistente del cuerpo. La mandíbula es el único hueso móvil del cráneo.",
+     facts:[["🔢","Formado por 22 huesos distintos fusionados"],["👶","Los bebés tienen 6 fontanelas (puntos blandos)"],["🦷","La mandíbula es el único hueso móvil"]],
+     svgCode:`<circle cx="150" cy="58" r="42" fill="rgba(156,163,175,.18)" stroke="#d1d5db" stroke-width="2.5"/><path d="M112 75 Q130 88,150 88 Q170 88,188 75" fill="none" stroke="#9ca3af" stroke-width="1.5" opacity=".6"/><circle cx="128" cy="52" r="10" fill="rgba(107,114,128,.25)" stroke="#6b7280" stroke-width="1.5"/><circle cx="172" cy="52" r="10" fill="rgba(107,114,128,.25)" stroke="#6b7280" stroke-width="1.5"/><path d="M118 95 Q135 108,150 105 Q165 108,182 95 Q186 115,178 125 Q165 130,150 128 Q135 130,122 125 Q114 115,118 95Z" fill="rgba(156,163,175,.15)" stroke="#9ca3af" stroke-width="1.5"/>` },
+    {id:"columna",emoji:"🏗️",name:"Columna Vertebral",tagline:"El pilar central",
+     desc:"33 vértebras apiladas que protegen la médula espinal y soportan el peso corporal. Los discos intervertebrales absorben impactos.",
+     facts:[["🔢","33 vértebras en total (en adultos se fusionan algunas)"],["💪","Puede soportar hasta 2 toneladas de presión"],["🏃","Los discos actúan como amortiguadores"]],
+     svgCode:`<rect x="138" y="5" width="24" height="12" rx="4" fill="rgba(156,163,175,.3)" stroke="#d1d5db" stroke-width="1.5"/><rect x="138" y="22" width="24" height="12" rx="4" fill="rgba(156,163,175,.3)" stroke="#d1d5db" stroke-width="1.5"/><rect x="138" y="39" width="24" height="12" rx="4" fill="rgba(156,163,175,.3)" stroke="#d1d5db" stroke-width="1.5"/><rect x="138" y="56" width="24" height="12" rx="4" fill="rgba(156,163,175,.3)" stroke="#d1d5db" stroke-width="1.5"/><rect x="138" y="73" width="24" height="12" rx="4" fill="rgba(156,163,175,.3)" stroke="#d1d5db" stroke-width="1.5"/><rect x="138" y="90" width="24" height="12" rx="4" fill="rgba(156,163,175,.3)" stroke="#d1d5db" stroke-width="1.5"/><rect x="135" y="17" width="30" height="5" rx="2" fill="rgba(107,114,128,.3)" stroke="#9ca3af" stroke-width="1"/><rect x="135" y="34" width="30" height="5" rx="2" fill="rgba(107,114,128,.3)" stroke="#9ca3af" stroke-width="1"/><rect x="135" y="51" width="30" height="5" rx="2" fill="rgba(107,114,128,.3)" stroke="#9ca3af" stroke-width="1"/><rect x="135" y="68" width="30" height="5" rx="2" fill="rgba(107,114,128,.3)" stroke="#9ca3af" stroke-width="1"/><text x="150" y="120" text-anchor="middle" fill="rgba(240,240,255,.5)" font-size="10">Discos intervertebrales</text>` },
+    {id:"costillas",emoji:"🛡️",name:"Costillas",tagline:"La caja protectora",
+     desc:"12 pares de costillas forman la caja torácica que protege corazón y pulmones. Las últimas 2 pares son 'flotantes' sin unión al esternón.",
+     facts:[["🔢","12 pares = 24 costillas en total"],["🦺","Protegen corazón, pulmones y hígado"],["🩸","Producen millones de glóbulos rojos diarios"]],
+     svgCode:`<rect x="138" y="10" width="24" height="100" rx="4" fill="rgba(107,114,128,.2)" stroke="#9ca3af" stroke-width="1.5"/><path d="M138 22 Q90 30,72 50 Q58 70,75 88 Q95 105,138 108" fill="none" stroke="#d1d5db" stroke-width="2.5" stroke-linecap="round"/><path d="M138 36 Q95 44,78 62 Q66 78,80 94 Q98 108,138 108" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/><path d="M162 22 Q210 30,228 50 Q242 70,225 88 Q205 105,162 108" fill="none" stroke="#d1d5db" stroke-width="2.5" stroke-linecap="round"/><path d="M162 36 Q205 44,222 62 Q234 78,220 94 Q202 108,162 108" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"/>` },
+    {id:"femur",emoji:"🦴",name:"Huesos Largos",tagline:"Fuerza y producción",
+     desc:"Fémur, tibia, húmero y radio son los más largos. Contienen médula ósea roja que produce 500 millones de glóbulos rojos cada día.",
+     facts:[["🏆","El fémur es el más largo y fuerte del cuerpo"],["🩸","La médula produce 500M glóbulos rojos/día"],["💪","Son más resistentes que el hormigón armado"]],
+     svgCode:`<circle cx="150" cy="22" r="16" fill="rgba(156,163,175,.25)" stroke="#d1d5db" stroke-width="2.5"/><rect x="143" y="38" width="14" height="60" rx="5" fill="rgba(107,114,128,.2)" stroke="#9ca3af" stroke-width="2"/><line x1="150" y1="55" x2="150" y2="90" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="3,3"/><circle cx="150" cy="108" r="16" fill="rgba(156,163,175,.25)" stroke="#d1d5db" stroke-width="2.5"/><text x="170" y="65" fill="rgba(240,240,255,.5)" font-size="10">Médula</text><text x="170" y="78" fill="rgba(240,240,255,.5)" font-size="10">ósea</text>` },
+    {id:"articulaciones",emoji:"⚙️",name:"Articulaciones",tagline:"Las bisagras del cuerpo",
+     desc:"360 articulaciones conectan huesos y permiten el movimiento. El líquido sinovial las lubrica para que no haya fricción.",
+     facts:[["🔢","Hay unas 360 articulaciones en el cuerpo"],["💧","El líquido sinovial lubrica el cartílago"],["🦵","La rodilla es la articulación más grande"]],
+     svgCode:`<circle cx="150" cy="65" r="28" fill="rgba(107,114,128,.15)" stroke="#9ca3af" stroke-width="2"/><rect x="140" y="20" width="20" height="35" rx="8" fill="rgba(156,163,175,.25)" stroke="#d1d5db" stroke-width="2"/><rect x="140" y="80" width="20" height="35" rx="8" fill="rgba(156,163,175,.25)" stroke="#d1d5db" stroke-width="2"/><circle cx="150" cy="65" r="14" fill="rgba(99,102,241,.12)" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="4,2"/><text x="150" y="69" text-anchor="middle" fill="rgba(240,240,255,.5)" font-size="9">Líquido</text>` }
+  ],
+  quiz: [
+    {q:"¿Cuántos huesos tiene un adulto?",opts:["150","180","206","270"],ans:2,exp:"¡Un adulto tiene 206 huesos! Los bebés nacen con 270 que se fusionan."},
+    {q:"¿Con cuántos huesos nacemos?",opts:["150","206","270","300"],ans:2,exp:"¡Los bebés nacen con aproximadamente 270 huesos, que se fusionan al crecer!"},
+    {q:"¿Cuál es el hueso más largo del cuerpo?",opts:["Tibia","Fémur","Radio","Húmero"],ans:1,exp:"¡El fémur (muslo) es el hueso más largo y fuerte del cuerpo humano!"},
+    {q:"¿Cuál es el hueso más pequeño?",opts:["Martillo (oído)","Nudillo","Vértebra","Clavícula"],ans:0,exp:"¡El martillo del oído medio es el hueso más pequeño, con apenas 3mm!"},
+    {q:"¿Cada cuánto tiempo se renueva el esqueleto?",opts:["1 año","5 años","~10 años","Nunca"],ans:2,exp:"¡El esqueleto completo se renueva aproximadamente cada 10 años gracias a la remodelación ósea!"}
+  ],
+  facts: [
+    {em:"🦴",txt:"El hueso es 5 veces más resistente que el acero en relación a su peso"},
+    {em:"💤",txt:"Tus huesos crecen más rápido mientras duermes por la hormona del crecimiento"},
+    {em:"🩸",txt:"La médula ósea produce 500 millones de células sanguíneas cada día"},
+    {em:"👶",txt:"Los bebés nacen con 270 huesos — muchos se fusionan al crecer"},
+    {em:"🦻",txt:"El hueso más pequeño del cuerpo está en tu oído: el martillo con 3mm"},
+    {em:"🏋️",txt:"El fémur puede soportar el peso de un auto — es el más fuerte del cuerpo"},
+    {em:"⏱️",txt:"Los huesos se renuevan completamente aproximadamente cada 10 años"},
+    {em:"🌱",txt:"El calcio de los huesos viene en gran parte de los alimentos que comes"}
+  ]
+};
+function renderComponents(){document.getElementById('comp-grid').innerHTML=SYS.components.map((c,i)=>`<div class="comp-card" onclick="openModal(${i})" tabindex="0" role="button" onkeydown="if(event.key==='Enter')openModal(${i})"><div class="comp-emoji">${c.emoji}</div><div class="comp-name">${c.name}</div><div class="comp-tag">${c.tagline}</div><span class="comp-arrow">→</span></div>`).join('')}
+function openModal(i){const c=SYS.components[i];document.getElementById('modal-emoji').textContent=c.emoji;document.getElementById('modal-name').textContent=c.name;document.getElementById('modal-tagline').textContent=c.tagline;document.getElementById('modal-svg').innerHTML=c.svgCode;document.getElementById('modal-desc').textContent=c.desc;document.getElementById('modal-facts').innerHTML=c.facts.map(f=>`<div class="modal-fact"><span class="modal-fact-icon">${f[0]}</span><span>${f[1]}</span></div>`).join('');document.getElementById('modal-overlay').classList.add('open')}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open')}
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal-overlay').addEventListener('click',e=>{if(e.target===document.getElementById('modal-overlay'))closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+let qIdx=0,score=0,answered=false;
+function renderQuiz(){document.getElementById('quiz-progress').innerHTML=SYS.quiz.map((_,i)=>`<div class="quiz-dot ${i<qIdx?'done':i===qIdx?'active':''}"></div>`).join('');if(qIdx>=SYS.quiz.length){document.getElementById('quiz-body').innerHTML=`<div class="quiz-score"><div class="quiz-score-num">${score}/${SYS.quiz.length}</div><div class="quiz-score-lbl">${score>=4?'🎉 ¡Excelente!':score>=2?'👏 ¡Bien hecho!':'💪 ¡Sigue practicando!'}</div><button class="quiz-retry" onclick="qIdx=0;score=0;answered=false;renderQuiz()">🔄 Intentar de nuevo</button></div>`;return;}const q=SYS.quiz[qIdx];document.getElementById('quiz-body').innerHTML=`<div class="quiz-q">Pregunta ${qIdx+1}: ${q.q}</div><div class="quiz-opts">${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQ(${i})">${o}</button>`).join('')}</div><div class="quiz-feedback" id="quiz-fb" style="display:none"></div><button class="quiz-next" id="quiz-next" onclick="qIdx++;answered=false;renderQuiz()" style="display:none">Siguiente →</button>`}
+function answerQ(i){if(answered)return;answered=true;const q=SYS.quiz[qIdx],correct=i===q.ans;if(correct)score++;document.querySelectorAll('.quiz-opt').forEach((el,idx)=>{el.disabled=true;if(idx===q.ans)el.classList.add('correct');else if(idx===i&&!correct)el.classList.add('wrong')});const fb=document.getElementById('quiz-fb');fb.style.display='block';fb.className='quiz-feedback '+(correct?'ok':'fail');fb.textContent=correct?'✅ '+q.exp:'❌ Correcto: '+q.opts[q.ans]+'. '+q.exp;document.getElementById('quiz-next').style.display='inline-flex'}
+renderComponents();renderQuiz();
+document.getElementById('facts-track').innerHTML=SYS.facts.map(f=>`<div class="fact-card"><div class="fact-em">${f.em}</div><p class="fact-txt">${f.txt}</p></div>`).join('');
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.appear').forEach(el=>io.observe(el));
+const ham=document.getElementById('ham'),menu=document.getElementById('nav-menu');
+ham.addEventListener('click',()=>menu.classList.toggle('open'));
+document.addEventListener('click',e=>{if(!ham.contains(e.target)&&!menu.contains(e.target))menu.classList.remove('open')});
+</script>
+</body>
+</html>

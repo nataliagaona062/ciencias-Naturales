@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulación Hormonal - Anatomía</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f9f9f9;
+        }
+
+        header {
+            background: linear-gradient(135deg, #d946a6 0%, #9d174d 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        nav {
+            background: #9d174d;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff69b4;
+        }
+
+        nav a.back {
+            background: #ff69b4;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 40px;
+            padding: 40px;
+            border-radius: 10px;
+            border-left: 4px solid #d946a6;
+        }
+
+        h2 {
+            color: #7c2d56;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h3 {
+            color: #9d174d;
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(217, 70, 166, 0.15), rgba(157, 23, 77, 0.15));
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #d946a6;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: #fce7f3;
+            border-left: 4px solid #d946a6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .hormone-card {
+            background: #f3f4f6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #d946a6;
+        }
+
+        .hormone-card h4 {
+            color: #7c2d56;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .illustration {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        .illustration-text {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #d946a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid #d946a6;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #d946a6;
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: #d946a6;
+        }
+
+        .btn.secondary:hover {
+            background: #d946a6;
+            color: white;
+        }
+
+        footer {
+            background: #7c2d56;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>⚗️ Regulación Hormonal</h1>
+        <p>Mensajeros químicos que controlan tu cuerpo</p>
+    </header>
+
+    <nav>
+        <a href="index.html" class="back">← Volver a inicio</a>
+    </nav>
+
+    <div class="container">
+        <!-- INTRODUCCIÓN -->
+        <section>
+            <h2>¿Qué son las hormonas?</h2>
+            <p>Las hormonas son sustancias químicas producidas por glándulas especializadas en tu cuerpo. Actúan como "mensajeros" que viajan a través de tu torrente sanguíneo, transmitiendo órdenes de una parte del cuerpo a otra.</p>
+            
+            <div class="highlight">
+                <strong>Analogía:</strong> Si el sistema nervioso es como una red de teléfono que envía mensajes instantáneamente, el sistema hormonal es más como el correo postal: más lento pero con efectos duraderos.
+            </div>
+
+            <h3>Diferencia con el sistema nervioso:</h3>
+            <ul>
+                <li><strong>Sistema Nervioso:</strong> Rápido (milisegundos), puntual, control de movimientos</li>
+                <li><strong>Sistema Hormonal:</strong> Lento (minutos a horas), duradero, control del metabolismo y emociones</li>
+            </ul>
+
+            <p>Trabajar juntos es lo que te permite funcionar perfectamente. Cuando ves algo que te asusta, tu sistema nervioso lo detecta rápidamente, y tu sistema hormonal libera adrenalina para prepararte para la acción.</p>
+        </section>
+
+        <!-- NEUROTRANSMISORES KEY -->
+        <section>
+            <h2>😊 Neurotransmisores: Los Químicos de la Felicidad</h2>
+            <p>Los neurotransmisores son moléculas especiales que transmiten señales entre neuronas. Aunque son técnicamente diferentes de las hormonas, actúan de manera similar y afectan profundamente tu estado emocional y mental.</p>
+
+            <div class="hormone-card">
+                <h4>🌟 Serotonina: El químico de la felicidad</h4>
+                <p><strong>Función:</strong> Regula el estado de ánimo, el sueño y el apetito.</p>
+                <p><strong>¿Qué hace?</strong> Cuando tienes buenos niveles de serotonina, te sientes feliz, relajado y seguro. Bajos niveles pueden causar depresión y ansiedad.</p>
+                <p><strong>Cómo aumentarla:</strong> Luz solar, ejercicio, buena alimentación, conexiones sociales positivas, chocolate oscuro.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>💪 Dopamina: El químico de la motivación</h4>
+                <p><strong>Función:</strong> Responsable del placer, la motivación y la recompensa.</p>
+                <p><strong>¿Qué hace?</strong> Te impulsa a alcanzar metas. Cuando logras algo, tu cerebro libera dopamina, haciéndote sentir bien. Es lo que te motiva a aprender, jugar y esforzarte.</p>
+                <p><strong>Cómo aumentarla:</strong> Lograr objetivos pequeños, ejercicio, música, juegos, socializar.</p>
+                <div class="info-box">
+                    <strong>Atención:</strong> Las redes sociales y los videojuegos pueden crear adicción porque disparan dopamina, pero de forma artificial. Es importante mantener un equilibrio.
+                </div>
+            </div>
+
+            <div class="hormone-card">
+                <h4>💕 Oxitocina: El químico del amor</h4>
+                <p><strong>Función:</strong> Promueve la conexión, el vínculo emocional y la confianza.</p>
+                <p><strong>¿Qué hace?</strong> Se libera cuando abrazas a alguien, cuando te sientes amado o cuando confías en otras personas. Es el "pegamento social" que nos mantiene unidos.</p>
+                <p><strong>Cómo aumentarla:</strong> Abrazos, pasar tiempo con seres queridos, actos de bondad, mascotas.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>🏃 Endorfinas: Los analgésicos naturales</h4>
+                <p><strong>Función:</strong> Reducen el dolor y crean sensación de placer.</p>
+                <p><strong>¿Qué hace?</strong> Cuando haces ejercicio intenso, especialmente después de 20-30 minutos, tu cerebro libera endorfinas. Te sientes "eufórico" y con energía. También se liberan cuando ríes mucho o experimentas situaciones emocionantes.</p>
+                <p><strong>Cómo aumentarlas:</strong> Ejercicio, risa, actividades placenteras, sauna, chocolate.</p>
+            </div>
+        </section>
+
+        <!-- HORMONAS GENERALES -->
+        <section>
+            <h2>💊 Hormonas Principales del Cuerpo</h2>
+            
+            <h3>Sistema Endocrino</h3>
+            <p>El sistema endocrino es la red de glándulas que producen y liberan hormonas. Funciona en constante comunicación con el sistema nervioso para mantener el equilibrio (homeostasis) en tu cuerpo.</p>
+
+            <div class="illustration">
+                <div class="illustration-text">🏛️</div>
+                <p>Las glándulas endocrinas producen más de 50 hormonas diferentes</p>
+            </div>
+
+            <h3>Principales hormonas y sus funciones:</h3>
+
+            <div class="hormone-card">
+                <h4>Insulina</h4>
+                <p>Producida por: Páncreas | Función: Controla los niveles de glucosa en sangre. Permite que el azúcar entre a las células para usarlo como energía.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Glucagón</h4>
+                <p>Producida por: Páncreas | Función: Opuesto a la insulina. Aumenta los niveles de glucosa cuando están bajos.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Adrenalina (Epinefrina)</h4>
+                <p>Producida por: Glándulas suprarrenales | Función: La hormona de "lucha o huida". Aumenta ritmo cardíaco, respiración y alerta mental cuando hay peligro.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Cortisol</h4>
+                <p>Producida por: Glándulas suprarrenales | Función: Hormona del estrés. Aumenta en situaciones de estrés. Debe estar equilibrada (demasiado causa ansiedad; muy poco causa fatiga).</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Hormona del Crecimiento (GH)</h4>
+                <p>Producida por: Glándula pituitaria | Función: Estimula el crecimiento, especialmente durante la adolescencia. También afecta la composición muscular y ósea.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Hormona Tiroidea (T3, T4)</h4>
+                <p>Producida por: Glándula tiroides | Función: Controla el metabolismo (la velocidad a la que quemas calorías). Bajos niveles causan fatiga; niveles altos causan ansiedad.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Melatonina</h4>
+                <p>Producida por: Glándula pineal | Función: Regula el ciclo sueño-vigilia. Se libera cuando oscurece, preparando tu cuerpo para dormir.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Testosterona</h4>
+                <p>Producida por: Testículos (hombres) y ovarios (mujeres) | Función: Hormona sexual. Afecta desarrollo sexual, libido, masa muscular y confianza.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>Estrógeno y Progesterona</h4>
+                <p>Producidas por: Ovarios | Función: Hormonas sexuales femeninas. Regulan el ciclo menstrual, desarrollo sexual y reproducción.</p>
+            </div>
+        </section>
+
+        <!-- GLÁNDULAS ENDOCRINAS -->
+        <section>
+            <h2>🏛️ Las Glándulas Endocrinas</h2>
+            <p>Estas son las "fábricas" que producen y liberan hormonas. Cada una tiene una función específica en mantener tu cuerpo funcionando correctamente.</p>
+
+            <div class="hormone-card">
+                <h4>🧠 Glándula Pituitaria (Hipófisis)</h4>
+                <p>Ubicación: Base del cerebro | Tamaño: Como un guisante | Función: La "glándula maestra". Controla el trabajo de casi todas las otras glándulas endocrinas.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>✨ Glándula Pineal</h4>
+                <p>Ubicación: Centro del cerebro | Función: Produce melatonina. Regula tu ciclo de sueño-vigilia y es sensible a la luz.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>🌳 Glándula Tiroides</h4>
+                <p>Ubicación: Base del cuello | Forma: Como una mariposa | Función: Controla metabolismo, crecimiento y temperatura corporal.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>🛡️ Glándula Timo</h4>
+                <p>Ubicación: Pecho, detrás del esternón | Función: Produce células del sistema inmunológico. Es especialmente importante durante la infancia y adolescencia.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>🔺 Glándulas Suprarrenales</h4>
+                <p>Ubicación: Sobre los riñones | Función: Producen adrenalina y cortisol. Son críticas en respuesta al estrés.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>🍯 Páncreas</h4>
+                <p>Ubicación: Detrás del estómago | Función: Produce insulina y glucagón. Regula niveles de glucosa en sangre.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>❤️ Corazón</h4>
+                <p>Función: Además de bombear sangre, produce hormonas que regulan la presión arterial y el balance de sal-agua.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>🫘 Riñones</h4>
+                <p>Función: Además de filtrar, producen hormonas que controlan la presión arterial y la producción de glóbulos rojos.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>♂️ Testículos</h4>
+                <p>Función: Producen testosterona y esperma. Responsables del desarrollo sexual masculino.</p>
+            </div>
+
+            <div class="hormone-card">
+                <h4>♀️ Ovarios</h4>
+                <p>Función: Producen estrógeno, progesterona y óvulos. Responsables del desarrollo sexual femenino y ciclo menstrual.</p>
+            </div>
+        </section>
+
+        <!-- EQUILIBRIO HORMONAL -->
+        <section>
+            <h2>⚖️ Equilibrio Hormonal y Salud</h2>
+            <p>Un cuerpo sano depende del equilibrio perfecto de todas estas hormonas. Si una está demasiado alta o baja, puede causar problemas de salud.</p>
+
+            <div class="highlight">
+                <strong>Ejemplo de desequilibrio:</strong> Si tu tiroides produce muy poca hormona tiroidea, te sentirás fatigado, deprimido y ganarás peso. Si produce demasiada, serás ansioso, energético en exceso y perderás peso sin razón.
+            </div>
+
+            <h3>Factores que afectan el equilibrio hormonal:</h3>
+            <ul>
+                <li><strong>Sueño:</strong> Dormir poco reduce serotonina y melatonina</li>
+                <li><strong>Estrés:</strong> Aumenta cortisol, afectando otras hormonas</li>
+                <li><strong>Ejercicio:</strong> Aumenta endorfinas y dopamina</li>
+                <li><strong>Nutrición:</strong> Vitaminas y minerales son necesarios para producir hormonas</li>
+                <li><strong>Luz solar:</strong> Afecta producción de vitamina D, serotonina y melatonina</li>
+                <li><strong>Relaciones sociales:</strong> Afectan oxitocina y estrés</li>
+            </ul>
+
+            <div class="info-box">
+                <strong>Tu poder:</strong> Aunque no puedes "forzar" tus hormonas directamente, PUEDES hacer cosas que naturalmente las regulen: duerme bien, haz ejercicio, pasa tiempo al sol, conecta con personas que amas, reduce estrés. ¡Tu cuerpo hará el resto!
+            </div>
+        </section>
+
+        <!-- BOTONES DE NAVEGACIÓN -->
+        <div class="button-group">
+            <a href="index.html" class="btn">← Volver a inicio</a>
+            <a href="sistema-digestivo.html" class="btn secondary">Siguiente: Sistema Digestivo →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Anatomía del Cuerpo Humano | Educación para Jóvenes</p>
+    </footer>
+</body>
+</html>

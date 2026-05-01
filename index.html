@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnatomíaViva — Descubre tu cuerpo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07071a;--glass:rgba(255,255,255,0.04);--gb:rgba(255,255,255,0.08);--tx:#f0f0ff;--tx2:rgba(240,240,255,0.6)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:58px;background:rgba(7,7,26,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--gb)}
+.nav-brand{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-menu{display:flex;list-style:none;gap:24px}
+.nav-menu a{color:var(--tx2);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s}
+.nav-menu a:hover{color:var(--tx)}
+.nav-ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-ham span{display:block;width:22px;height:2px;background:var(--tx);border-radius:2px;transition:.3s}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.35);color:#a5b4fc;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 18px;border-radius:100px;margin-bottom:28px;animation:fadeD .7s ease both}
+.hero-title{font-family:'Poppins',sans-serif;font-weight:900;font-size:clamp(2.4rem,7vw,5.2rem);line-height:1.07;margin-bottom:20px;animation:fadeU .8s ease .1s both}
+.gtext{background:linear-gradient(135deg,#6366f1 0%,#a855f7 50%,#ec4899 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:var(--tx2);font-size:clamp(1rem,2.5vw,1.2rem);max-width:480px;line-height:1.65;margin-bottom:36px;animation:fadeU .8s ease .2s both}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;padding:15px 36px;border-radius:100px;text-decoration:none;box-shadow:0 0 40px rgba(99,102,241,.45),0 4px 24px rgba(0,0,0,.3);transition:transform .25s,box-shadow .25s;animation:fadeU .8s ease .35s both}
+.hero-cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 64px rgba(99,102,241,.6),0 8px 32px rgba(0,0,0,.4)}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tx2);font-size:.72rem;animation:fadeU 1s ease 1.2s both}
+.scroll-dot{width:6px;height:6px;border-radius:50%;background:var(--tx2);animation:bounce 1.4s ease-in-out infinite}
+.stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:16px;max-width:840px;margin:0 auto;padding:0 24px 64px}
+.stat-card{background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:22px 16px;text-align:center;backdrop-filter:blur(12px)}
+.stat-val{display:block;font-family:'Poppins',sans-serif;font-weight:900;font-size:2rem;background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+.stat-lbl{font-size:.78rem;color:var(--tx2);margin-top:6px;line-height:1.4}
+.systems{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:10px 24px 64px}
+.sec-head{text-align:center;margin-bottom:48px}
+.sec-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(1.7rem,4vw,2.4rem);margin-bottom:10px}
+.sec-sub{color:var(--tx2);font-size:1rem}
+.systems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:20px}
+.sys-card{background:var(--glass);border:1px solid var(--gb);border-radius:24px;padding:28px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:13px;cursor:pointer;transition:border-color .3s,box-shadow .3s;position:relative;overflow:hidden;transform-style:preserve-3d;will-change:transform}
+.sys-card:hover{border-color:var(--c,rgba(99,102,241,.6));box-shadow:0 12px 48px rgba(0,0,0,.4),0 0 0 1px var(--c,rgba(99,102,241,.6))}
+.sys-card::after{content:'';position:absolute;inset:0;border-radius:24px;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.04) 0%,transparent 60%);pointer-events:none}
+.card-icon{width:68px;height:68px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:var(--cb,rgba(99,102,241,.12));flex-shrink:0}
+.card-icon svg{width:46px;height:46px}
+.card-name{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.15rem}
+.card-desc{font-size:.87rem;color:var(--tx2);line-height:1.65;flex:1}
+.card-badge{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;color:var(--ct,#a5b4fc);background:var(--cb,rgba(99,102,241,.1));border-radius:100px;padding:5px 13px;width:fit-content}
+.card-explore{display:inline-flex;align-items:center;gap:8px;font-size:.87rem;font-weight:600;color:var(--ct,#a5b4fc);background:none;border:1px solid currentColor;border-radius:100px;padding:8px 18px;cursor:pointer;text-decoration:none;transition:background .2s;width:fit-content;margin-top:4px}
+.card-explore:hover{background:var(--cb,rgba(99,102,241,.15))}
+.facts-section{position:relative;z-index:1;padding:0 0 64px 24px}
+.facts-head{font-family:'Poppins',sans-serif;font-weight:700;font-size:1.45rem;margin-bottom:20px;padding-right:24px}
+.facts-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab}
+.facts-track:active{cursor:grabbing}
+.facts-track::-webkit-scrollbar{display:none}
+.fact-card{flex:0 0 196px;background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:20px 16px;scroll-snap-align:start;transition:transform .2s,border-color .2s;user-select:none}
+.fact-card:hover{transform:translateY(-4px);border-color:rgba(99,102,241,.4)}
+.fact-em{font-size:2.2rem;margin-bottom:10px}
+.fact-txt{font-size:.84rem;color:var(--tx2);line-height:1.55}
+.footer{position:relative;z-index:1;border-top:1px solid var(--gb);padding:28px 24px;text-align:center;font-size:.82rem;color:var(--tx2)}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:12px}
+.footer-links a{text-decoration:none;font-weight:500;transition:opacity .2s;opacity:.8}
+.footer-links a:hover{opacity:1}
+@keyframes fadeD{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeU{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.14)}28%{transform:scale(1)}42%{transform:scale(1.08)}56%{transform:scale(1)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+@keyframes boneGlow{0%,100%{filter:drop-shadow(0 0 0px #d1d5db)}50%{filter:drop-shadow(0 0 6px #d1d5db)}}
+@keyframes muscleFlex{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.93) scaleX(1.05)}}
+.appear{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.appear.in{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-menu{display:none}.nav-ham{display:flex}.nav-menu.open{display:flex;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:rgba(7,7,26,.98);backdrop-filter:blur(16px);padding:12px 24px 20px;gap:12px;border-bottom:1px solid var(--gb)}.systems-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ─── 3D Body Video Player ─── */
+.video-section{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:20px 24px 72px;text-align:center}
+.b3d-wrap{position:relative;display:inline-block;width:100%;max-width:560px}
+.b3d-glow{position:absolute;inset:-4px;border-radius:28px;z-index:-1;
+  background:conic-gradient(from 0deg,#6366f1,#a855f7,#ec4899,#ff1744,#10b981,#f59e0b,#6366f1);
+  filter:blur(22px);opacity:.28;animation:rotGlow 6s linear infinite}
+@keyframes rotGlow{to{transform:rotate(360deg)}}
+.b3d-player{position:relative;border-radius:24px;overflow:hidden;
+  background:#04040f;border:1px solid rgba(255,255,255,.07);
+  box-shadow:0 24px 80px rgba(0,0,0,.65)}
+#body3d{display:block;width:100%;aspect-ratio:16/9}
+.b3d-sys{position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  font-size:.73rem;font-weight:600;letter-spacing:.05em;padding:4px 16px;
+  border-radius:100px;background:rgba(0,0,0,.6);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.1);color:#fff;
+  opacity:0;transition:opacity .3s,color .3s,border-color .3s;
+  white-space:nowrap;pointer-events:none}
+.b3d-controls{position:absolute;bottom:0;left:0;right:0;
+  padding:10px 14px 13px;
+  background:linear-gradient(transparent,rgba(2,2,14,.97))}
+.b3d-row{display:flex;align-items:center;gap:10px}
+.b3d-btn{width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:.8rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;flex-shrink:0}
+.b3d-btn:hover{background:rgba(255,255,255,.24)}
+.b3d-prog{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.b3d-fill{height:100%;width:0%;border-radius:2px;
+  background:linear-gradient(90deg,#6366f1,#a855f7,#ec4899,#ff1744,#10b981,#f59e0b)}
+.b3d-time{font-size:.69rem;color:rgba(255,255,255,.55);
+  min-width:30px;text-align:right;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<nav class="nav">
+  <a class="nav-brand" href="index.html">🧬 AnatomíaViva</a>
+  <ul class="nav-menu" id="nav-menu">
+    <li><a href="#sistemas">Sistemas</a></li>
+    <li><a href="#datos">Datos</a></li>
+    <li><a href="sistema-nervioso.html" style="color:#a5b4fc">Explorar →</a></li>
+  </ul>
+  <button class="nav-ham" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<main>
+<section class="hero">
+  <div class="hero-tag">✨ Plataforma educativa interactiva</div>
+  <h1 class="hero-title">El cuerpo humano<br>es <span class="gtext">increíblemente</span><br><span class="gtext">fascinante</span></h1>
+  <p class="hero-sub">6 sistemas, quizzes interactivos y datos que te dejarán sin palabras. Aprende explorando, no leyendo.</p>
+  <a href="#sistemas" class="hero-cta">🚀 Empezar exploración</a>
+  <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><div class="scroll-dot"></div></div>
+</section>
+
+<section class="video-section">
+  <div class="sec-head" style="margin-bottom:32px">
+    <h2 class="sec-title">🫀 Tu cuerpo en 360°</h2>
+    <p class="sec-sub">Todos tus sistemas, rotando en 3D en tiempo real</p>
+  </div>
+  <div class="b3d-wrap">
+    <div class="b3d-glow"></div>
+    <div class="b3d-player">
+      <canvas id="body3d" width="560" height="315"></canvas>
+      <div class="b3d-sys" id="b3dSys">🦴 Sistema Óseo</div>
+      <div class="b3d-controls">
+        <div class="b3d-row">
+          <button class="b3d-btn" id="b3dPlay" title="Play/Pause">⏸</button>
+          <div class="b3d-prog"><div class="b3d-fill" id="b3dFill"></div></div>
+          <span class="b3d-time" id="b3dTime">0.0s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="stats" id="stats">
+  <div class="stat-card appear"><span class="stat-val" data-to="86" data-sfx="B+">0</span><span class="stat-lbl">Neuronas en tu cerebro</span></div>
+  <div class="stat-card appear"><span class="stat-val" data-to="206" data-sfx="">0</span><span class="stat-lbl">Huesos en el cuerpo</span></div>
+  <div class="stat-card appear"><span class="stat-val" data-to="640" data-sfx="+">0</span><span class="stat-lbl">Músculos activos</span></div>
+  <div class="stat-card appear"><span class="stat-val" data-to="100" data-sfx="K">0</span><span class="stat-lbl">Latidos por día</span></div>
+</section>
+
+<section class="systems" id="sistemas">
+  <div class="sec-head">
+    <h2 class="sec-title">9 Sistemas que te mantienen vivo</h2>
+    <p class="sec-sub">Haz clic en un sistema y comienza tu exploración interactiva</p>
+  </div>
+  <div class="systems-grid">
+    <a href="sistema-nervioso.html" class="sys-card appear" style="--c:rgba(99,102,241,.6);--cb:rgba(99,102,241,.12);--ct:#a5b4fc">
+      <div class="card-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <ellipse cx="40" cy="40" rx="27" ry="21" fill="rgba(99,102,241,.15)" stroke="#6366f1" stroke-width="2"/>
+          <line x1="40" y1="19" x2="40" y2="61" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <path d="M22 34 Q31 27,40 34 Q49 27,58 34" fill="none" stroke="#6366f1" stroke-width="1.5"/>
+          <path d="M18 46 Q29 39,40 46 Q51 39,62 46" fill="none" stroke="#6366f1" stroke-width="1.5"/>
+          <circle cx="28" cy="51" r="3" fill="#7c3aed"><animate attributeName="r" values="2;4.5;2" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="52" cy="51" r="3" fill="#7c3aed"><animate attributeName="r" values="2;4.5;2" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".4;1;.4" dur="2.4s" repeatCount="indefinite"/></circle>
+          <circle cx="40" cy="38" r="2.5" fill="#0066ff"><animate attributeName="r" values="1.5;3.5;1.5" dur="1.8s" repeatCount="indefinite"/></circle>
+          <line x1="28" y1="51" x2="40" y2="38" stroke="#7c3aed" stroke-width=".8" stroke-dasharray="2,2" opacity=".6"/><line x1="52" y1="51" x2="40" y2="38" stroke="#7c3aed" stroke-width=".8" stroke-dasharray="2,2" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="card-name">🧠 Sistema Nervioso</div>
+      <div class="card-desc">El centro de comando. 86 mil millones de neuronas transmiten señales a 120 m/s sin parar.</div>
+      <div class="card-badge">⚡ 120 m/s velocidad</div>
+      <span class="card-explore">Explorar →</span>
+    </a>
+    <a href="sistema-circulatorio.html" class="sys-card appear" style="--c:rgba(255,23,68,.6);--cb:rgba(255,23,68,.1);--ct:#fca5a5">
+      <div class="card-icon" style="background:rgba(255,23,68,.1)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <style>.hb{animation:heartbeat 1.5s ease-in-out infinite;transform-origin:40px 44px}</style>
+          <g class="hb"><path d="M40 62 L16 42 C6 32,12 16,24 16 C31 16,37 21,40 29 C43 21,49 16,56 16 C68 16,74 32,64 42 Z" fill="rgba(255,23,68,.22)" stroke="#ff1744" stroke-width="2" stroke-linejoin="round"/></g>
+          <polyline points="5,55 14,55 18,46 22,63 26,40 32,63 36,55 56,55 60,46 64,59 68,55 76,55" fill="none" stroke="#ff6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="200" stroke-dashoffset="200"><animate attributeName="stroke-dashoffset" from="200" to="0" dur="2.5s" repeatCount="indefinite"/></polyline>
+        </svg>
+      </div>
+      <div class="card-name">❤️ Sistema Circulatorio</div>
+      <div class="card-desc">Tu corazón late 100,000 veces al día bombeando sangre por 100,000 km de vasos sanguíneos.</div>
+      <div class="card-badge" style="color:#fca5a5;background:rgba(255,23,68,.1)">❤️ 5 L/min bombeados</div>
+      <span class="card-explore" style="color:#fca5a5">Explorar →</span>
+    </a>
+    <a href="sistema-respiratorio.html" class="sys-card appear" style="--c:rgba(16,185,129,.6);--cb:rgba(16,185,129,.1);--ct:#6ee7b7">
+      <div class="card-icon" style="background:rgba(16,185,129,.1)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <g style="animation:breathe 3s ease-in-out infinite;transform-origin:40px 46px">
+            <path d="M40 18 C36 17,18 20,15 38 C12 55,22 68,36 70 C40 71,40 68,40 65" fill="rgba(16,185,129,.15)" stroke="#10b981" stroke-width="2"/>
+            <path d="M40 18 C44 17,62 20,65 38 C68 55,58 68,44 70 C40 71,40 68,40 65" fill="rgba(16,185,129,.15)" stroke="#10b981" stroke-width="2"/>
+            <line x1="40" y1="8" x2="40" y2="20" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M40 20 Q34 25,30 28 M40 20 Q46 25,50 28" fill="none" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <circle cx="26" cy="50" r="4" fill="rgba(20,184,166,.45)" stroke="#14b8a6"/><circle cx="35" cy="60" r="3.5" fill="rgba(20,184,166,.45)" stroke="#14b8a6"/><circle cx="54" cy="50" r="4" fill="rgba(20,184,166,.45)" stroke="#14b8a6"/><circle cx="45" cy="60" r="3.5" fill="rgba(20,184,166,.45)" stroke="#14b8a6"/>
+        </svg>
+      </div>
+      <div class="card-name">🫁 Sistema Respiratorio</div>
+      <div class="card-desc">Respiras 20,000 veces al día. Tus pulmones tienen 300 millones de alvéolos de intercambio.</div>
+      <div class="card-badge" style="color:#6ee7b7;background:rgba(16,185,129,.1)">💨 20K respiraciones/día</div>
+      <span class="card-explore" style="color:#6ee7b7">Explorar →</span>
+    </a>
+    <a href="sistema-digestivo.html" class="sys-card appear" style="--c:rgba(245,158,11,.6);--cb:rgba(245,158,11,.1);--ct:#fcd34d">
+      <div class="card-icon" style="background:rgba(245,158,11,.1)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="18" r="9" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2"/>
+          <line x1="40" y1="27" x2="40" y2="36" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+          <path d="M27 43 Q40 36,53 43 Q58 50,53 58 Q40 64,27 58 Q22 50,27 43Z" fill="rgba(245,158,11,.2)" stroke="#f59e0b" stroke-width="2"/>
+          <path d="M35 63 Q30 72,32 78" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"><animate attributeName="d" values="M35 63 Q30 72,32 78;M35 63 Q40 72,38 78;M35 63 Q30 72,32 78" dur="2s" repeatCount="indefinite"/></path>
+          <path d="M45 63 Q50 72,48 78" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"><animate attributeName="d" values="M45 63 Q50 72,48 78;M45 63 Q40 72,42 78;M45 63 Q50 72,48 78" dur="2.4s" repeatCount="indefinite"/></path>
+        </svg>
+      </div>
+      <div class="card-name">🫃 Sistema Digestivo</div>
+      <div class="card-desc">Tu comida viaja 9 metros en 24 horas. El estómago produce 2 litros de ácido gástrico al día.</div>
+      <div class="card-badge" style="color:#fcd34d;background:rgba(245,158,11,.1)">🍕 9 metros de longitud</div>
+      <span class="card-explore" style="color:#fcd34d">Explorar →</span>
+    </a>
+    <a href="sistema-oseo.html" class="sys-card appear" style="--c:rgba(156,163,175,.6);--cb:rgba(107,114,128,.1);--ct:#d1d5db">
+      <div class="card-icon" style="background:rgba(107,114,128,.1)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <style>.bg2{animation:boneGlow 3s ease-in-out infinite}</style>
+          <circle cx="40" cy="18" r="11" fill="rgba(107,114,128,.18)" stroke="#d1d5db" stroke-width="2"/>
+          <rect x="34" y="30" width="12" height="20" rx="4" fill="rgba(107,114,128,.15)" stroke="#9ca3af" stroke-width="1.5"/>
+          <path d="M34 35 L22 42 M34 43 L22 50" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M46 35 L58 42 M46 43 L58 50" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M37 50 L32 65 M43 50 L48 65" stroke="#9ca3af" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="22" cy="46" r="5" fill="rgba(107,114,128,.15)" stroke="#6b7280" stroke-width="1.5"/>
+          <circle cx="58" cy="46" r="5" fill="rgba(107,114,128,.15)" stroke="#6b7280" stroke-width="1.5"/>
+          <g class="bg2"><circle cx="40" cy="18" r="11" fill="none" stroke="#f3f4f6" stroke-width="1" opacity=".4"/></g>
+        </svg>
+      </div>
+      <div class="card-name">💀 Sistema Óseo</div>
+      <div class="card-desc">206 huesos te estructuran. Naciste con 270, pero muchos se fusionan mientras creces.</div>
+      <div class="card-badge" style="color:#d1d5db;background:rgba(107,114,128,.1)">🦴 206 huesos adultos</div>
+      <span class="card-explore" style="color:#d1d5db">Explorar →</span>
+    </a>
+    <a href="sistema-muscular.html" class="sys-card appear" style="--c:rgba(239,68,68,.6);--cb:rgba(153,27,27,.12);--ct:#fca5a5">
+      <div class="card-icon" style="background:rgba(153,27,27,.12)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <style>.mf{animation:muscleFlex 2.5s ease-in-out infinite;transform-origin:40px 40px}</style>
+          <path d="M24 62 Q18 46,24 36 Q32 22,40 20 Q48 22,56 36 Q62 46,56 62 Z" fill="rgba(153,27,27,.2)" stroke="#991b1b" stroke-width="2"/>
+          <path d="M28 46 Q34 36,40 34 Q46 36,52 46" fill="rgba(220,38,38,.18)" stroke="#ef4444" stroke-width="1.5"/>
+          <path d="M30 52 Q38 42,50 52" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2" stroke-linecap="round"/>
+          <path d="M28 43 Q38 35,52 43" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2" stroke-linecap="round"/>
+          <path d="M32 58 Q40 49,48 58" stroke="#92400e" stroke-width="1.5" stroke-dasharray="3,2" stroke-linecap="round"/>
+          <g class="mf"><path d="M24 62 Q18 46,24 36 Q32 22,40 20 Q48 22,56 36 Q62 46,56 62 Z" fill="none" stroke="#dc2626" stroke-width="1" opacity=".5"/></g>
+        </svg>
+      </div>
+      <div class="card-name">💪 Sistema Muscular</div>
+      <div class="card-desc">640 músculos representan el 40% de tu peso corporal. Algunos se regeneran cada 300 días.</div>
+      <div class="card-badge" style="color:#fca5a5;background:rgba(153,27,27,.12)">💪 640 músculos</div>
+      <span class="card-explore" style="color:#fca5a5">Explorar →</span>
+    </a>
+
+    <!-- REPRODUCTOR -->
+    <a href="sistema-reproductor.html" class="sys-card appear" style="--c:rgba(236,72,153,.6);--cb:rgba(236,72,153,.1);--ct:#f9a8d4">
+      <div class="card-icon" style="background:rgba(236,72,153,.1)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- Útero estilizado (femenino) -->
+          <path d="M40 52 Q26 52,22 42 Q18 32,28 26 Q34 22,40 26 Q46 22,52 26 Q62 32,58 42 Q54 52,40 52Z"
+                fill="rgba(236,72,153,.18)" stroke="#ec4899" stroke-width="2"/>
+          <!-- Trompas -->
+          <path d="M22 36 Q14 30,12 22 Q14 16,20 18" fill="none" stroke="#ec4899" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M58 36 Q66 30,68 22 Q66 16,60 18" fill="none" stroke="#ec4899" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Ovarios -->
+          <ellipse cx="18" cy="18" rx="6" ry="4.5" fill="rgba(236,72,153,.25)" stroke="#ec4899" stroke-width="1.5">
+            <animate attributeName="rx" values="5;7;5" dur="3s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="62" cy="18" rx="6" ry="4.5" fill="rgba(236,72,153,.25)" stroke="#ec4899" stroke-width="1.5">
+            <animate attributeName="rx" values="5;7;5" dur="3.4s" repeatCount="indefinite"/>
+          </ellipse>
+          <!-- Cuello y vagina -->
+          <rect x="36" y="52" width="8" height="14" rx="4" fill="rgba(236,72,153,.2)" stroke="#ec4899" stroke-width="1.5"/>
+          <!-- Símbolo ♀ arriba -->
+          <circle cx="62" cy="62" r="7" fill="none" stroke="#f9a8d4" stroke-width="1.2" opacity=".6"/>
+          <line x1="62" y1="69" x2="62" y2="75" stroke="#f9a8d4" stroke-width="1.2" opacity=".6"/>
+          <line x1="59" y1="72" x2="65" y2="72" stroke="#f9a8d4" stroke-width="1.2" opacity=".6"/>
+          <!-- Símbolo ♂ -->
+          <circle cx="18" cy="63" r="6" fill="none" stroke="#c4b5fd" stroke-width="1.2" opacity=".6"/>
+          <line x1="23" y1="58" x2="27" y2="54" stroke="#c4b5fd" stroke-width="1.2" opacity=".6" stroke-linecap="round"/>
+          <line x1="27" y1="54" x2="24" y2="54" stroke="#c4b5fd" stroke-width="1.2" opacity=".6"/>
+          <line x1="27" y1="54" x2="27" y2="57" stroke="#c4b5fd" stroke-width="1.2" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="card-name">🌸 Sistema Reproductor</div>
+      <div class="card-desc">El sistema que perpetúa la vida. Femenino y masculino con anatomía y funciones únicas y complementarias.</div>
+      <div class="card-badge" style="color:#f9a8d4;background:rgba(236,72,153,.1)">🧬 23 pares de cromosomas</div>
+      <span class="card-explore" style="color:#f9a8d4">Explorar →</span>
+    </a>
+
+
+    <!-- ENDOCRINO -->
+    <a href="sistema-endocrino.html" class="sys-card appear" style="--c:rgba(251,191,36,.6);--cb:rgba(251,191,36,.1);--ct:#fde68a">
+      <div class="card-icon" style="background:rgba(251,191,36,.1)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- Hipófisis (centro comando) -->
+          <ellipse cx="40" cy="18" rx="10" ry="7" fill="rgba(251,191,36,.25)" stroke="#fbbf24" stroke-width="1.8">
+            <animate attributeName="rx" values="9;12;9" dur="2.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <!-- Tiroides (mariposa) -->
+          <path d="M27 36 Q22 30,26 26 Q30 22,34 28 Q37 33,40 34 Q43 33,46 28 Q50 22,54 26 Q58 30,53 36 Q48 40,40 38 Q32 40,27 36Z"
+                fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="1.5"/>
+          <!-- Timo (destacado) -->
+          <path d="M32 46 Q28 42,30 48 Q32 56,40 58 Q48 56,50 48 Q52 42,48 46 Q44 50,40 51 Q36 50,32 46Z"
+                fill="rgba(251,191,36,.35)" stroke="#f59e0b" stroke-width="2">
+            <animate attributeName="opacity" values=".6;1;.6" dur="2s" repeatCount="indefinite"/>
+          </path>
+          <!-- Label timo -->
+          <text x="40" y="56" text-anchor="middle" fill="#fde68a" font-size="7" font-weight="bold">TIMO</text>
+          <!-- Suprarrenales -->
+          <path d="M16 64 Q12 60,14 56 Q18 52,22 56 Q24 60,22 64Z" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="1.3"/>
+          <path d="M64 64 Q68 60,66 56 Q62 52,58 56 Q56 60,58 64Z" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="1.3"/>
+          <!-- Páncreas -->
+          <path d="M26 72 Q40 68,54 72 Q58 74,54 76 Q40 72,26 76 Q22 74,26 72Z" fill="rgba(251,191,36,.2)" stroke="#fbbf24" stroke-width="1.3"/>
+          <!-- Rayos desde hipófisis -->
+          <line x1="40" y1="25" x2="40" y2="32" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,2" opacity=".6"/>
+          <line x1="34" y1="22" x2="30" y2="28" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,2" opacity=".5"/>
+          <line x1="46" y1="22" x2="50" y2="28" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,2" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="card-name">⚗️ Sistema Endocrino</div>
+      <div class="card-desc">Una red de glándulas que secretan hormonas directamente a la sangre. El timo entrena a los guardianes de tu sistema inmune.</div>
+      <div class="card-badge" style="color:#fde68a;background:rgba(251,191,36,.1)">🦋 50+ hormonas activas</div>
+      <span class="card-explore" style="color:#fde68a">Explorar →</span>
+    </a>
+    <!-- RENAL -->
+    <a href="sistema-renal.html" class="sys-card appear" style="--c:rgba(6,182,212,.6);--cb:rgba(6,182,212,.1);--ct:#67e8f9">
+      <div class="card-icon" style="background:rgba(6,182,212,.1)">
+        <svg viewBox="0 0 80 80" fill="none">
+          <!-- Riñón izquierdo -->
+          <path d="M24 20 C14 20,10 30,10 40 C10 50,14 60,24 60 C30 60,34 56,35 48 C36 42,34 38,35 32 C36 26,30 20,24 20Z"
+                fill="rgba(6,182,212,.18)" stroke="#06b6d4" stroke-width="2">
+            <animate attributeName="d"
+              values="M24 20 C14 20,10 30,10 40 C10 50,14 60,24 60 C30 60,34 56,35 48 C36 42,34 38,35 32 C36 26,30 20,24 20Z;
+                      M24 19 C13 19,9 29,9 40 C9 51,13 61,24 61 C31 61,35 57,36 48 C37 41,35 37,36 31 C37 25,31 19,24 19Z;
+                      M24 20 C14 20,10 30,10 40 C10 50,14 60,24 60 C30 60,34 56,35 48 C36 42,34 38,35 32 C36 26,30 20,24 20Z"
+              dur="2.5s" repeatCount="indefinite"/>
+          </path>
+          <!-- Médula riñón izq -->
+          <path d="M27 28 C21 28,18 33,18 40 C18 47,21 52,27 52 C30 52,32 50,33 46 C34 42,32 38,33 34 C34 30,30 28,27 28Z"
+                fill="rgba(6,182,212,.1)" stroke="#22d3ee" stroke-width="1"/>
+          <!-- Riñón derecho -->
+          <path d="M56 20 C66 20,70 30,70 40 C70 50,66 60,56 60 C50 60,46 56,45 48 C44 42,46 38,45 32 C44 26,50 20,56 20Z"
+                fill="rgba(14,165,233,.18)" stroke="#0ea5e9" stroke-width="2">
+            <animate attributeName="d"
+              values="M56 20 C66 20,70 30,70 40 C70 50,66 60,56 60 C50 60,46 56,45 48 C44 42,46 38,45 32 C44 26,50 20,56 20Z;
+                      M56 19 C67 19,71 29,71 40 C71 51,67 61,56 61 C49 61,45 57,44 48 C43 41,45 37,44 31 C43 25,49 19,56 19Z;
+                      M56 20 C66 20,70 30,70 40 C70 50,66 60,56 60 C50 60,46 56,45 48 C44 42,46 38,45 32 C44 26,50 20,56 20Z"
+              dur="2.5s" repeatCount="indefinite"/>
+          </path>
+          <!-- Médula riñón der -->
+          <path d="M53 28 C59 28,62 33,62 40 C62 47,59 52,53 52 C50 52,48 50,47 46 C46 42,48 38,47 34 C46 30,50 28,53 28Z"
+                fill="rgba(14,165,233,.1)" stroke="#38bdf8" stroke-width="1"/>
+          <!-- Uréteres y vejiga -->
+          <path d="M35 46 Q40 55,45 46" fill="none" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <ellipse cx="40" cy="62" rx="9" ry="7" fill="rgba(6,182,212,.15)" stroke="#06b6d4" stroke-width="1.5"/>
+          <!-- Gota de agua animada -->
+          <circle cx="40" cy="62" r="3" fill="rgba(6,182,212,.5)">
+            <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".3;.8;.3" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="card-name">💧 Sistema Renal</div>
+      <div class="card-desc">Tus riñones filtran 180 litros de sangre al día para producir 1-2 litros de orina y mantener el equilibrio del cuerpo.</div>
+      <div class="card-badge" style="color:#67e8f9;background:rgba(6,182,212,.1)">💧 180 L filtrados/día</div>
+      <span class="card-explore" style="color:#67e8f9">Explorar →</span>
+    </a>
+  </div>
+</section>
+
+<section class="facts-section" id="datos">
+  <h2 class="facts-head">🤯 Datos que te volarán la cabeza</h2>
+  <div class="facts-track">
+    <div class="fact-card"><div class="fact-em">🧠</div><p class="fact-txt">Tu cerebro genera suficiente electricidad para encender una pequeña bombilla</p></div>
+    <div class="fact-card"><div class="fact-em">❤️</div><p class="fact-txt">En tu vida entera, tu corazón latirá aproximadamente 3 billones de veces</p></div>
+    <div class="fact-card"><div class="fact-em">🦴</div><p class="fact-txt">El hueso compacto es 5 veces más resistente que el acero en relación al peso</p></div>
+    <div class="fact-card"><div class="fact-em">👁️</div><p class="fact-txt">El ojo humano puede distinguir hasta 10 millones de tonalidades de color</p></div>
+    <div class="fact-card"><div class="fact-em">💨</div><p class="fact-txt">Cuando estornudas, el aire sale a 160 km/h — más que un auto en autopista</p></div>
+    <div class="fact-card"><div class="fact-em">🧬</div><p class="fact-txt">Si estiraras tu ADN, mediría de aquí al Sol y de vuelta 600 veces</p></div>
+    <div class="fact-card"><div class="fact-em">🩸</div><p class="fact-txt">Tus glóbulos rojos recorren todo el cuerpo en apenas 20 segundos</p></div>
+    <div class="fact-card"><div class="fact-em">🌡️</div><p class="fact-txt">Tu cuerpo produce suficiente calor al día para hervir 30 litros de agua</p></div>
+    <div class="fact-card"><div class="fact-em">💤</div><p class="fact-txt">Tus huesos crecen más rápido mientras duermes gracias a la hormona del crecimiento</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>🧬 <strong>AnatomíaViva</strong> — Plataforma educativa interactiva</div>
+  <nav class="footer-links">
+    <a href="sistema-nervioso.html" style="color:#6366f1">🧠 Nervioso</a>
+    <a href="sistema-circulatorio.html" style="color:#ff1744">❤️ Circulatorio</a>
+    <a href="sistema-respiratorio.html" style="color:#10b981">🫁 Respiratorio</a>
+    <a href="sistema-digestivo.html" style="color:#f59e0b">🫃 Digestivo</a>
+    <a href="sistema-oseo.html" style="color:#9ca3af">💀 Óseo</a>
+    <a href="sistema-muscular.html" style="color:#ef4444">💪 Muscular</a>
+    <a href="sistema-reproductor.html" style="color:#ec4899">🌸 Reproductor</a>
+    <a href="sistema-renal.html" style="color:#06b6d4">💧 Renal</a>
+    <a href="sistema-endocrino.html" style="color:#fbbf24">⚗️ Endocrino</a>
+  </nav>
+</footer>
+</main>
+
+<script>
+(function(){
+  const cv=document.getElementById('bg-canvas'),cx=cv.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+  function init(){pts=[];const n=Math.min(Math.floor(W*H/11000),90);for(let i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.4+.6,h:Math.floor(Math.random()*60+220)})}
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    for(let i=0;i<pts.length;i++){
+      const p=pts[i];p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+      cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.fillStyle=`hsla(${p.h},80%,70%,.6)`;cx.fill();
+      for(let j=i+1;j<pts.length;j++){const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);if(d<115){cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.strokeStyle=`rgba(140,120,255,${.07*(1-d/115)})`;cx.lineWidth=.7;cx.stroke()}}
+    }
+    requestAnimationFrame(draw);
+  }
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+document.querySelectorAll('.sys-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(900px) rotateY(${x*14}deg) rotateX(${-y*14}deg) translateZ(8px)`;
+    card.style.transition='transform .08s';
+    card.style.setProperty('--mx',`${(x+.5)*100}%`);card.style.setProperty('--my',`${(y+.5)*100}%`);
+  });
+  card.addEventListener('mouseleave',()=>{card.style.transform='';card.style.transition='transform .5s ease,border-color .3s,box-shadow .3s'});
+});
+
+function animCount(el){
+  const to=+el.dataset.to,sfx=el.dataset.sfx||'',dur=1900,t0=performance.now();
+  function step(t){const p=Math.min((t-t0)/dur,1),v=Math.round((1-Math.pow(1-p,3))*to);el.textContent=v.toLocaleString('es')+sfx;if(p<1)requestAnimationFrame(step)}
+  requestAnimationFrame(step);
+}
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');const c=e.target.querySelector('[data-to]');if(c&&!c.dataset.done){c.dataset.done=1;animCount(c)}io.unobserve(e.target)})},{threshold:.18});
+document.querySelectorAll('.appear').forEach(el=>io.observe(el));
+
+const ham=document.getElementById('ham'),menu=document.getElementById('nav-menu');
+ham.addEventListener('click',()=>menu.classList.toggle('open'));
+document.addEventListener('click',e=>{if(!ham.contains(e.target)&&!menu.contains(e.target))menu.classList.remove('open')});
+
+// ═══════════════════════════════════════
+//  3-D BODY ANIMATION
+// ═══════════════════════════════════════
+(function(){
+  var cv = document.getElementById('body3d');
+  if(!cv) return;
+  var ctx = cv.getContext('2d');
+  var CW = cv.width, CH = cv.height;
+  var OX = CW/2, OY = CH/2 + 14;
+  var SC = CH * 0.39;
+  var LOOP = 3000; // ms per full rotation
+
+  // Joint positions [x, y, z]  (body ≈ 4 units tall, centered)
+  var J = {
+    hd:[0,-1.78,0], nk:[0,-1.38,0],
+    lS:[-0.54,-1.02,0], rS:[0.54,-1.02,0],
+    lE:[-0.84,-0.38,0.06], rE:[0.84,-0.38,0.06],
+    lW:[-0.9,0.32,0.04],  rW:[0.9,0.32,0.04],
+    s1:[0,-0.82,0], s2:[0,-0.4,0], s3:[0,0.05,0], hc:[0,0.28,0],
+    lH:[-0.28,0.31,0], rH:[0.28,0.31,0],
+    lK:[-0.3,1.06,0.04], rK:[0.3,1.06,0.04],
+    lA:[-0.3,1.83,0.02], rA:[0.3,1.83,0.02],
+    lF:[-0.35,1.97,0],   rF:[0.35,1.97,0],
+    lR1:[-0.46,-0.78,0.13], rR1:[0.46,-0.78,0.13],
+    lR2:[-0.49,-0.5,0.15],  rR2:[0.49,-0.5,0.15],
+    lR3:[-0.44,-0.22,0.11], rR3:[0.44,-0.22,0.11],
+    lR4:[-0.34,0.02,0.07],  rR4:[0.34,0.02,0.07]
+  };
+
+  // Bone connections
+  var BONES = [
+    ['nk','lS'],['nk','rS'],
+    ['lS','lE'],['lE','lW'],
+    ['rS','rE'],['rE','rW'],
+    ['nk','s1'],['s1','s2'],['s2','s3'],['s3','hc'],
+    ['hc','lH'],['hc','rH'],
+    ['lH','lK'],['lK','lA'],['lA','lF'],
+    ['rH','rK'],['rK','rA'],['rA','rF'],
+    ['s1','lR1'],['s1','rR1'],
+    ['s2','lR2'],['s2','rR2'],
+    ['s3','lR3'],['s3','rR3'],
+    ['hc','lR4'],['hc','rR4'],
+    ['lR1','lR2'],['rR1','rR2'],
+    ['lR2','lR3'],['rR2','rR3'],
+    ['lR3','lR4'],['rR3','rR4']
+  ];
+
+  // Systems: name, hex color, emoji, highlighted joints (null = all)
+  var SYS = [
+    {n:'Sistema Óseo',       c:'#c8ccd8', e:'🦴', hi:null},
+    {n:'Sistema Nervioso',   c:'#6366f1', e:'🧠', hi:['hd','nk','s1','s2','s3','hc']},
+    {n:'Sistema Circulatorio',c:'#ff1744',e:'❤️', hi:['nk','s1','lR1','rR1','lR2','rR2','lS','rS','lE','rE']},
+    {n:'Sistema Respiratorio',c:'#10b981',e:'🫁', hi:['s1','s2','lR1','rR1','lR2','rR2','lR3','rR3','lR4','rR4']},
+    {n:'Sistema Muscular',   c:'#dc2626', e:'💪', hi:['lS','rS','lE','rE','lW','rW','lH','rH','lK','rK','lA','rA']},
+    {n:'Sistema Digestivo',  c:'#f59e0b', e:'🍎', hi:['s2','s3','hc','lH','rH','lR3','rR3','lR4','rR4']}
+  ];
+
+  var paused = false, startT = 0, pausedAt = 0, totalPaused = 0;
+  var curSys = -1, labelTO;
+  var sysEl  = document.getElementById('b3dSys');
+  var btnEl  = document.getElementById('b3dPlay');
+  var fillEl = document.getElementById('b3dFill');
+  var timeEl = document.getElementById('b3dTime');
+
+  function project(name, angle){
+    var pt = J[name];
+    var x=pt[0], y=pt[1], z=pt[2];
+    var c=Math.cos(angle), s=Math.sin(angle);
+    var rx = x*c - z*s;
+    var rz = x*s + z*c;
+    var dep = 1 + rz * 0.23;
+    return { sx: OX + rx*SC*dep, sy: OY + y*SC, d: rz, a: 0.35 + rz*0.55 };
+  }
+
+  function draw(ts){
+    if(paused) return;
+    if(!startT) startT = ts;
+    var elapsed = ts - startT - totalPaused;
+    var t = (elapsed % LOOP) / LOOP;
+    var angle = t * Math.PI * 2;
+
+    // Switch system label
+    var si = Math.min(Math.floor(t * SYS.length), SYS.length-1);
+    if(si !== curSys){
+      curSys = si;
+      var sys = SYS[si];
+      sysEl.textContent = sys.e + ' ' + sys.n;
+      sysEl.style.color = sys.c;
+      sysEl.style.borderColor = sys.c + '55';
+      sysEl.style.opacity = '1';
+      clearTimeout(labelTO);
+      labelTO = setTimeout(function(){ sysEl.style.opacity = '0'; }, 460);
+    }
+
+    fillEl.style.width = (t*100) + '%';
+    timeEl.textContent = ((elapsed % LOOP)/1000).toFixed(1) + 's';
+
+    ctx.clearRect(0,0,CW,CH);
+
+    // Radial bg
+    var bg = ctx.createRadialGradient(OX,OY,0,OX,OY,CW*0.58);
+    bg.addColorStop(0,'rgba(18,12,48,0.7)');
+    bg.addColorStop(1,'rgba(2,2,12,0)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0,0,CW,CH);
+
+    var sys = SYS[curSys < 0 ? 0 : curSys];
+
+    // Project all joints
+    var P = {};
+    var names = Object.keys(J);
+    for(var i=0; i<names.length; i++) P[names[i]] = project(names[i], angle);
+
+    // Sort bones back-to-front
+    var sorted = BONES.slice().sort(function(a,b){
+      return ((P[a[0]].d+P[a[1]].d)/2) - ((P[b[0]].d+P[b[1]].d)/2);
+    });
+
+    // Draw bones
+    for(var i=0; i<sorted.length; i++){
+      var bone = sorted[i];
+      var pa = P[bone[0]], pb = P[bone[1]];
+      var lit = sys.hi === null || sys.hi.indexOf(bone[0])>=0 || sys.hi.indexOf(bone[1])>=0;
+      var avg = (pa.a + pb.a) / 2;
+      ctx.beginPath();
+      ctx.moveTo(pa.sx, pa.sy);
+      ctx.lineTo(pb.sx, pb.sy);
+      if(lit){
+        ctx.strokeStyle = sys.c;
+        ctx.lineWidth = Math.max(0.9, (1.5 + (pa.d+pb.d)*0.3) * avg);
+        ctx.shadowColor = sys.c;
+        ctx.shadowBlur = 9;
+      } else {
+        ctx.strokeStyle = 'rgba(65,68,105,0.35)';
+        ctx.lineWidth = 0.7;
+        ctx.shadowBlur = 0;
+      }
+      ctx.lineCap = 'round';
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    // Head circle
+    var hp = P['hd'];
+    var headLit = sys.hi === null || sys.hi.indexOf('hd') >= 0;
+    ctx.beginPath();
+    ctx.arc(hp.sx, hp.sy, SC * 0.113, 0, Math.PI*2);
+    ctx.strokeStyle = headLit ? sys.c : 'rgba(65,68,105,0.35)';
+    ctx.lineWidth = headLit ? 1.9 : 0.8;
+    ctx.shadowColor = headLit ? sys.c : 'transparent';
+    ctx.shadowBlur = headLit ? 12 : 0;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Glowing joint dots (lit only)
+    for(var i=0; i<names.length; i++){
+      var nm = names[i];
+      if(nm === 'hd') continue;
+      var lit = sys.hi === null || (sys.hi && sys.hi.indexOf(nm)>=0);
+      if(!lit) continue;
+      var pp = P[nm];
+      ctx.beginPath();
+      ctx.arc(pp.sx, pp.sy, 2.2 + pp.d*0.6, 0, Math.PI*2);
+      ctx.fillStyle = sys.c;
+      ctx.shadowColor = sys.c;
+      ctx.shadowBlur = 12;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(function(ts){ startT = ts; requestAnimationFrame(draw); });
+
+  btnEl.addEventListener('click', function(){
+    paused = !paused;
+    btnEl.textContent = paused ? '▶' : '⏸';
+    if(paused){
+      pausedAt = performance.now();
+    } else {
+      totalPaused += performance.now() - pausedAt;
+      requestAnimationFrame(draw);
+    }
+  });
+})();
+
+</script>
+</body>
+</html>
